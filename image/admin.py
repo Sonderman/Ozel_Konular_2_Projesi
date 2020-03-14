@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here
 
-from .models import Category
+from .models import *
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -11,4 +11,11 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ['status']
 
 
+class ImageAdmin(admin.ModelAdmin):
+    # fields = ['title', 'status']
+    list_display = ['title', 'category', 'status']
+    list_filter = ['category']
+
+
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Image, ImageAdmin)
