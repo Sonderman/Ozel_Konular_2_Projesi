@@ -28,6 +28,7 @@ class Image(models.Model):
         ('True', 'Evet'),
         ('False', 'Hayır'),
     )
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     keywords = models.CharField(max_length=255)
