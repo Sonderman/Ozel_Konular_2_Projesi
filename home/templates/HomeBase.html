@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -31,15 +31,19 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+{% include 'header.html' %}
 <!-- Main wrapper -->
 <div class="wrapper" id="wrapper">
-    {% include 'header.html' %}
+    {% block body %}
     {% include 'searchPopUp.html' %}
     {% include 'sliderArea.html' %}
     {% include 'gallery.html' %}
+    {% endblock %}
     {% include 'footer.html' %}
 </div>
 <!-- //Main wrapper -->
+
 {% include 'jsFiles.html' %}
+
 </body>
 </html>
