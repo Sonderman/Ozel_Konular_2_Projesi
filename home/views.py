@@ -1,11 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-
 # Create your views here.
-def index(request):
-    unv="Karabuk Universitesi"
-    fakulte="Muhendislik F."
-    context={'unv':unv,'fakulte':fakulte}
-    return render(request,'index.html',context)
+from .models import *
 
+
+def index(request):
+    setting = Setting.objects.get(pk=1)
+    context = {'setting': setting}
+    return render(request, 'index.html', context)
