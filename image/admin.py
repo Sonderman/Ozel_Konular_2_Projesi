@@ -12,19 +12,21 @@ class ImageInline(admin.TabularInline):
 
 class CategoryAdmin(admin.ModelAdmin):
     # fields = ['title', 'status']
-    list_display = ['title', 'status']
+    list_display = ['title', 'image_tag', 'status']
+    readonly_fields = ('image_tag',)
     list_filter = ['status']
 
 
 class ImageAdmin(admin.ModelAdmin):
-    # fields = ['title', 'status']
-    list_display = ['title', 'category', 'status']
+    list_display = ['title', 'category', 'image_tag', 'status']
+    readonly_fields = ('image_tag',)
     list_filter = ['category']
     inlines = [ImageInline]
 
 
 class ImagesAdmin(admin.ModelAdmin):
-    list_display = ['title', 'parent_image', 'image']
+    list_display = ['title', 'parent_image', 'image_tag']
+    readonly_fields = ('image_tag',)
 
 
 admin.site.register(Category, CategoryAdmin)
