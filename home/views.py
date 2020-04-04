@@ -1,12 +1,15 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
+
+from image.models import Image
 from .models import *
 
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting}
+    sliderdata = Image.objects.all()[:4]
+    context = {'setting': setting, 'sliderdata': sliderdata}
     return render(request, 'index.html', context)
 
 
