@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Category(models.Model):
@@ -39,7 +40,7 @@ class Image(models.Model):
     title = models.CharField(max_length=100)
     keywords = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    detail = models.TextField()
+    detail = RichTextUploadingField()
     image = models.ImageField(blank=True, upload_to='images/', max_length=255)  # py -m pip install --upgrade Pillow
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)

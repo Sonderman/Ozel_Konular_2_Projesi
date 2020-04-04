@@ -1,4 +1,4 @@
-"""OzelKonular2 URL Configuration
+"""FotoPaylasimProje URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -23,9 +23,9 @@ Burası sitemizin Routing kısmının ayarlandığı yer
 """
 urlpatterns = [
     path('', include('home.urls')),
-    # path('home/', include('home.urls')),
     path('image/', include('image.urls')),
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
