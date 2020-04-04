@@ -34,11 +34,15 @@
 {% include 'header.html' %}
 <!-- Main wrapper -->
 <div class="wrapper" id="wrapper">
-    {% block body %}
     {% include 'searchPopUp.html' %}
+
+    {% block body %}
+
     {% include 'sliderArea.html' %}
     {% include 'gallery.html' %}
+
     {% endblock %}
+
     {% include 'footer.html' %}
 </div>
 <!-- //Main wrapper -->

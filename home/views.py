@@ -9,3 +9,15 @@ def index(request):
     setting = Setting.objects.get(pk=1)
     context = {'setting': setting}
     return render(request, 'index.html', context)
+
+
+def contact(request):
+    setting = Setting.objects.get(pk=1)
+    context = {'setting': setting}
+    return render(request, 'Pages/contactPage.html', context)
+
+
+def aboutus(request):
+    setting = Setting.objects.get(pk=1)
+    context = {'setting': setting}
+    return render(request, 'Pages/aboutUsPage.html', context)
