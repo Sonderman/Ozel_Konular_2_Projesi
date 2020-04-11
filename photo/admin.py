@@ -17,7 +17,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ['status']
 
 
-class ImageAdmin(admin.ModelAdmin):
+class PhotoAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'image_tag', 'status']
     readonly_fields = ('image_tag',)
     list_filter = ['category']
@@ -25,10 +25,10 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 class ImagesAdmin(admin.ModelAdmin):
-    list_display = ['title', 'parent_image', 'image_tag']
+    list_display = ['title', 'photo', 'image_tag']
     readonly_fields = ('image_tag',)
 
 
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Image, ImageAdmin)
+admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Images, ImagesAdmin)

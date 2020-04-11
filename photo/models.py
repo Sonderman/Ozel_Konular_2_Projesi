@@ -30,7 +30,7 @@ class Category(models.Model):
     image_tag.short_description = 'Image'
 
 
-class Image(models.Model):
+class Photo(models.Model):
     STATUS = (
         ('True', 'Evet'),
         ('False', 'Hayır'),
@@ -57,7 +57,7 @@ class Image(models.Model):
 
 
 class Images(models.Model):
-    parent_image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, blank=True)
     image = models.ImageField(blank=True, upload_to='images/', max_length=255)  # py -m pip install --upgrade Pillow
 
