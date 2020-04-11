@@ -7,6 +7,9 @@ from .models import *
 
 
 def index(request):
+    #data = Photo.objects.all().order_by('-id')[4]
+    # data = Photo.objects.all().order_by('?')[4]
+    #photo = Photo.objects.filter(category_id=id
     setting = Setting.objects.get(pk=1)
     sliderdata = Photo.objects.all()[:4]
     category = Category.objects.all()
