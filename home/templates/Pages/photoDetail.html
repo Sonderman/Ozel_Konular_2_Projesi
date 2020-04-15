@@ -5,31 +5,328 @@
 {% block icon %}{{ setting.icon }}{% endblock %}
 
 {% block body %}
-    {% include 'searchPopUp.html' %}
 
-    <div class="ht__bradcaump__area bg-image--5">
+    <div class="maincontent bg--white pt--80 pb--55">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">About Us</h2>
-                        <nav class="bradcaump-content">
-                            <a class="breadcrumb_item" href="/">Home</a>
-                            <span class="brd-separetor">/</span>
-                            <span class="breadcrumb_item active">About Us</span>
-                        </nav>
+                <div class="col-lg-9 col-12">
+                    <div class="wn__single__product">
+
+
+                        {% include "Components/slideofphoto.html" %}
+
+                    </div>
+
+                    <div class="product__info__detailed">
+                        <div class="pro_details_nav nav justify-content-start" role="tablist">
+                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details"
+                               role="tab">Details</a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>
+                        </div>
+                        <div class="tab__container">
+                            <!-- Start Single Tab Content -->
+                            <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
+                                {{ photo.detail|safe }}
+                            </div>
+                            <!-- End Single Tab Content -->
+                            <!-- Start Single Tab Content -->
+                            <div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
+                                <div class="review__attribute">
+                                    <h1>Customer Reviews</h1>
+                                    <h2>Hastech</h2>
+                                    <div class="review__ratings__type d-flex">
+                                        <div class="review-ratings">
+                                            <div class="rating-summary d-flex">
+                                                <span>Quality</span>
+                                                <ul class="rating d-flex">
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="rating-summary d-flex">
+                                                <span>Price</span>
+                                                <ul class="rating d-flex">
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div class="rating-summary d-flex">
+                                                <span>value</span>
+                                                <ul class="rating d-flex">
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="review-content">
+                                            <p>Hastech</p>
+                                            <p>Review by Hastech</p>
+                                            <p>Posted on 11/6/2018</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="review-fieldset">
+                                    <h2>You're reviewing:</h2>
+                                    <h3>Chaz Kangeroo Hoodie</h3>
+                                    <div class="review-field-ratings">
+                                        <div class="product-review-table">
+                                            <div class="review-field-rating d-flex">
+                                                <span>Quality</span>
+                                                <ul class="rating d-flex">
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div class="review-field-rating d-flex">
+                                                <span>Price</span>
+                                                <ul class="rating d-flex">
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div class="review-field-rating d-flex">
+                                                <span>Value</span>
+                                                <ul class="rating d-flex">
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review_form_field">
+                                        <div class="input__box">
+                                            <span>Nickname</span>
+                                            <input id="nickname_field" type="text" name="nickname">
+                                        </div>
+                                        <div class="input__box">
+                                            <span>Summary</span>
+                                            <input id="summery_field" type="text" name="summery">
+                                        </div>
+                                        <div class="input__box">
+                                            <span>Review</span>
+                                            <textarea name="review"></textarea>
+                                        </div>
+                                        <div class="review-form-actions">
+                                            <button>Submit Review</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Tab Content -->
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+                    <div class="wn__sidebar">
+                        <!-- Start Single Widget -->
+                        <aside class="widget search_widget">
+                            <h3 class="widget-title">Search</h3>
+                            <form action="#">
+                                <div class="form-input">
+                                    <input type="text" placeholder="Search...">
+                                    <button><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                        </aside>
+                        <!-- End Single Widget -->
+
+                        <!-- Start Single Widget -->
+                        <aside class="widget category_widget">
+                            <h3 class="widget-title">Categories</h3>
+                            <ul>
+                                <li><a href="#">Fashion</a></li>
+                                <li><a href="#">Creative</a></li>
+                                <li><a href="#">Electronics</a></li>
+                                <li><a href="#">Kids</a></li>
+                                <li><a href="#">Flower</a></li>
+                                <li><a href="#">Books</a></li>
+                                <li><a href="#">Jewelle</a></li>
+                            </ul>
+                        </aside>
+                        <!-- End Single Widget -->
+
+                        <aside class="wedget__categories poroduct--tag">
+                            <h3 class="wedget__title">Product Tags</h3>
+                            <ul>
+                                <li><a href="#">Biography</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Cookbooks</a></li>
+                                <li><a href="#">Health & Fitness</a></li>
+                                <li><a href="#">History</a></li>
+                                <li><a href="#">Mystery</a></li>
+                                <li><a href="#">Inspiration</a></li>
+                                <li><a href="#">Religion</a></li>
+                                <li><a href="#">Fiction</a></li>
+                                <li><a href="#">Fantasy</a></li>
+                                <li><a href="#">Music</a></li>
+                                <li><a href="#">Toys</a></li>
+                                <li><a href="#">Hoodies</a></li>
+                            </ul>
+                        </aside>
+
+                        <!-- Start Single Widget -->
+                        <aside class="widget recent_widget">
+                            <h3 class="widget-title">Recent</h3>
+                            <div class="recent-posts">
+                                <ul>
+                                    <li>
+                                        <div class="post-wrapper d-flex">
+                                            <div class="thumb">
+                                                <a href="blog-details.html"><img src="images/blog/sm-img/1.jpg"
+                                                                                 alt="blog images"></a>
+                                            </div>
+                                            <div class="content">
+                                                <h4><a href="blog-details.html">Blog image post</a></h4>
+                                                <p> March 10, 2015</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post-wrapper d-flex">
+                                            <div class="thumb">
+                                                <a href="blog-details.html"><img src="images/blog/sm-img/2.jpg"
+                                                                                 alt="blog images"></a>
+                                            </div>
+                                            <div class="content">
+                                                <h4><a href="blog-details.html">Post with Gallery</a></h4>
+                                                <p> March 10, 2015</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post-wrapper d-flex">
+                                            <div class="thumb">
+                                                <a href="blog-details.html"><img src="images/blog/sm-img/3.jpg"
+                                                                                 alt="blog images"></a>
+                                            </div>
+                                            <div class="content">
+                                                <h4><a href="blog-details.html">Post with Video</a></h4>
+                                                <p> March 10, 2015</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post-wrapper d-flex">
+                                            <div class="thumb">
+                                                <a href="blog-details.html"><img src="images/blog/sm-img/4.jpg"
+                                                                                 alt="blog images"></a>
+                                            </div>
+                                            <div class="content">
+                                                <h4><a href="blog-details.html">Maecenas ultricies</a></h4>
+                                                <p> March 10, 2015</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post-wrapper d-flex">
+                                            <div class="thumb">
+                                                <a href="blog-details.html"><img src="images/blog/sm-img/5.jpg"
+                                                                                 alt="blog images"></a>
+                                            </div>
+                                            <div class="content">
+                                                <h4><a href="blog-details.html">Blog image post</a></h4>
+                                                <p> March 10, 2015</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </aside>
+                        <!-- End Single Widget -->
+                        <!-- Start Single Widget -->
+                        <aside class="widget comment_widget">
+                            <h3 class="widget-title">Comments</h3>
+                            <ul>
+                                <li>
+                                    <div class="post-wrapper">
+                                        <div class="thumb">
+                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
+                                        </div>
+                                        <div class="content">
+                                            <p>demo says:</p>
+                                            <a href="#">Quisque semper nunc vitae...</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="post-wrapper">
+                                        <div class="thumb">
+                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
+                                        </div>
+                                        <div class="content">
+                                            <p>Admin says:</p>
+                                            <a href="#">Curabitur aliquet pulvinar...</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="post-wrapper">
+                                        <div class="thumb">
+                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
+                                        </div>
+                                        <div class="content">
+                                            <p>Irin says:</p>
+                                            <a href="#">Quisque semper nunc vitae...</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="post-wrapper">
+                                        <div class="thumb">
+                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
+                                        </div>
+                                        <div class="content">
+                                            <p>Boighor says:</p>
+                                            <a href="#">Quisque semper nunc vitae...</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="post-wrapper">
+                                        <div class="thumb">
+                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
+                                        </div>
+                                        <div class="content">
+                                            <p>demo says:</p>
+                                            <a href="#">Quisque semper nunc vitae...</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </aside>
+                        <!-- End Single Widget -->
+
+
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
 
-    <section class="section-padding--lg bg--white">
-        <div class="container">
-            <div class="col-lg-12">
-                {{ setting.aboutus|safe }}
-            </div>
-        </div>
-    </section>
+
+
 
 {% endblock %}

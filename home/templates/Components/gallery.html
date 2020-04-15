@@ -11,7 +11,6 @@
                 </div>
             </div>
         </div>
-
         <!--
     {% load mptt_tags %}
 <ul>
@@ -26,7 +25,7 @@
         </li>
     {% endrecursetree %}
 </ul>
-    -->
+        -->
 
         <div class="row masonry__wrap">
             {% for ph in photos %}
@@ -34,20 +33,20 @@
                 <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 gallery__item cat--{{ ph.category_id }}">
                     <div class="portfolio">
                         <div class="thumb">
-                            <a href="../static/../static/portfolio-details.html">
+                            <a href="../../static/portfolio-details.html">
                                 <img src="{{ ph.image.url }}" alt="portfolio images">
                             </a>
                             <div class="search">
-                                <a href="../static/../static/images/portfolio/big-2/1.jpg" data-lightbox="grportimg"
-                                   data-title="My caption"><i
+                                <a href="{{ ph.image.url }}" data-lightbox="grportimg"
+                                   data-title="{{ ph.title }}"><i
                                         class="zmdi zmdi-search"></i></a>
                             </div>
                             <div class="link">
-                                <a href="../static/portfolio-details.html"><i class="fa fa-link"></i></a>
+                                <a href="/photo/{{ ph.id }}/{{ ph.slug }}"><i class="fa fa-link"></i></a>
                             </div>
                         </div>
                         <div class="content">
-                            <h6><a href="../static/portfolio-details.html">{{ ph.title }}</a></h6>
+                            <h6><a href="/photo/{{ ph.id }}/{{ ph.slug }}">{{ ph.title }}</a></h6>
                             <p>road theme</p>
                         </div>
                     </div>

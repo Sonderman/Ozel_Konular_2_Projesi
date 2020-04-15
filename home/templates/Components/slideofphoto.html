@@ -1,0 +1,21 @@
+{% load static %}
+
+
+<div class="col-lg-6 col-12">
+    <div class="wn__fotorama__wrapper">
+        <div class="fotorama wn__fotorama__action" data-nav="thumbs">
+
+                <a href="{{ photo.id }}.jpg"><img src="{{ photo.image.url }}" alt=""></a>
+
+
+            {% for img in imgofphoto %}
+                <a href="{{ img.id }}.jpg"><img src="{{ img.image.url }}" alt=""></a>
+            {% endfor %}
+        <!--
+            <a href="1.jpg"><img src="../../static/images/product/1.jpg" alt=""></a>
+            <a href="2.jpg"><img src="../../static/images/product/2.jpg" alt=""></a>
+        -->
+        </div>
+    </div>
+</div>
+

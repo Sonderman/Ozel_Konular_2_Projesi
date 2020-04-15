@@ -7,9 +7,9 @@ from .models import *
 
 
 def index(request):
-    #data = Photo.objects.all().order_by('-id')[4]
+    # data = Photo.objects.all().order_by('-id')[4]
     # data = Photo.objects.all().order_by('?')[4]
-    #photo = Photo.objects.filter(category_id=id
+    # photo = Photo.objects.filter(category_id=id
     setting = Setting.objects.get(pk=1)
     sliderdata = Photo.objects.all()[:4]
     category = Category.objects.all()
@@ -51,6 +51,7 @@ def references(request):
 
 def photo_detail(request, id, slug):
     setting = Setting.objects.get(pk=1)
-    photo = Photo.objects.filter(category_id=id)
-    context = {'setting': setting, 'photo': photo}
+    photo = Photo.objects.get(pk=id)
+    images = Images.objects.filter(photo=id)
+    context = {'setting': setting, 'photo': photo, 'imgofphoto': images}
     return render(request, 'Pages/photoDetail.html', context)
