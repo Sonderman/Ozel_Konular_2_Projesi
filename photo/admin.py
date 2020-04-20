@@ -16,6 +16,11 @@ class PhotoAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['subject', 'comment', 'photo', 'user', 'status']
+    list_filter = ['status']
+
+
 class ImagesAdmin(admin.ModelAdmin):
     list_display = ['title', 'photo', 'image_tag']
     readonly_fields = ('image_tag',)
@@ -62,3 +67,4 @@ class MPTTCategoryAdmin(DraggableMPTTAdmin):
 admin.site.register(Category, MPTTCategoryAdmin)
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Images, ImagesAdmin)
+admin.site.register(Comment, CommentAdmin)

@@ -31,104 +31,125 @@
                             <!-- End Single Tab Content -->
                             <!-- Start Single Tab Content -->
                             <div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
-                                <div class="review__attribute">
-                                    <h1>Customer Reviews</h1>
-                                    <h2>Hastech</h2>
-                                    <div class="review__ratings__type d-flex">
-                                        <div class="review-ratings">
-                                            <div class="rating-summary d-flex">
-                                                <span>Quality</span>
-                                                <ul class="rating d-flex">
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                </ul>
-                                            </div>
+                                <div class="blog-details content">
+                                    <div class="comments_area">
+                                        <h3 class="comment__title">1 comment</h3>
+                                        <ul class="comment__list">
+                                            {% for com in comments %}
+                                                <li>
+                                                    <div class="wn__comment">
+                                                        <div class="thumb">
+                                                            <img src="images/blog/comment/1.jpeg" alt="image">
+                                                        </div>
+                                                        <div class="content">
 
-                                            <div class="rating-summary d-flex">
-                                                <span>Price</span>
-                                                <ul class="rating d-flex">
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="rating-summary d-flex">
-                                                <span>value</span>
-                                                <ul class="rating d-flex">
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="review-content">
-                                            <p>Hastech</p>
-                                            <p>Review by Hastech</p>
-                                            <p>Posted on 11/6/2018</p>
-                                        </div>
+                                                            <div class="comnt__author d-block d-sm-flex">
+                                                                <span><a href="#">{{ com.user.first_name }}</a> Post author</span>
+                                                                <span>{{ com.created_at }}</span>
+                                                                <div class="reply__btn">
+                                                                    <a href="#">Reply</a>
+                                                                </div>
+                                                            </div>
+                                                            <p>{{ com.comment }}</p>
+
+
+                                                            <div class="review__attribute">
+
+                                                                <div class="review__ratings__type d-flex">
+                                                                    <div class="review-ratings">
+                                                                        <div class="rating-summary d-flex">
+                                                                            <span>Rate</span>
+                                                                            <ul class="rating d-flex">
+                                                                                <li {% if com.rate < 1 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 2 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 3 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 4 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 5 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
+                                                                            </ul>
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+                                            <!--
+                                            <li class="comment_reply">
+                                                <div class="wn__comment">
+                                                    <div class="thumb">
+                                                        <img src="images/blog/comment/1.jpeg" alt="comment images">
+                                                    </div>
+                                                    <div class="content">
+                                                        <div class="comnt__author d-block d-sm-flex">
+                                                            <span><a href="#">admin</a> Post author</span>
+                                                            <span>October 6, 2014 at 9:26 am</span>
+                                                            <div class="reply__btn">
+                                                                <a href="#">Reply</a>
+                                                            </div>
+                                                        </div>
+                                                        <p>Sed interdum at justo in efficitur. Vivamus gravida volutpat sodales. Fusce ornare sit</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            -->
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="review-fieldset">
-                                    <h2>You're reviewing:</h2>
-                                    <h3>Chaz Kangeroo Hoodie</h3>
-                                    <div class="review-field-ratings">
-                                        <div class="product-review-table">
-                                            <div class="review-field-rating d-flex">
-                                                <span>Quality</span>
-                                                <ul class="rating d-flex">
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                </ul>
+                                    <h2>You're reviewing:</h2> <br>
+                                    <h3>{{ photo.title }}</h3>
+
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                                {{ message }}
                                             </div>
-                                            <div class="review-field-rating d-flex">
-                                                <span>Price</span>
-                                                <ul class="rating d-flex">
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                </ul>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <form action="/photo/addcomment/{{ photo.id }}" method="post">
+                                        {% csrf_token %}
+                                        <div class="review_form_field">
+
+                                            <div class="input__box">
+                                                <span>Subject</span>
+                                                <input id="summery_field" type="text" name="subject">
                                             </div>
-                                            <div class="review-field-rating d-flex">
-                                                <span>Value</span>
-                                                <ul class="rating d-flex">
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                    <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                </ul>
+                                            <div class="input__box">
+                                                <span>Comment</span>
+                                                <textarea name="comment"
+                                                          placeholder="Type your comment here"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <strong class="text-uppercase">
+                                                    Your Rating:
+                                                </strong>
+                                                <input id="star1" type="radio" name="rate" value="1"/><label
+                                                    for="star1"></label>
+                                                <input id="star2" type="radio" name="rate" value="2"/><label
+                                                    for="star2"></label>
+                                                <input id="star3" type="radio" name="rate" value="3"/><label
+                                                    for="star3"></label>
+                                                <input id="star4" type="radio" name="rate" value="4"/><label
+                                                    for="star4"></label>
+                                                <input id="star5" type="radio" name="rate" value="5"/><label
+                                                    for="star5"></label>
+
+                                            </div>
+                                            <div class="review-form-actions">
+                                                {% if user.id is not  None %}
+                                                    <button>Submit Review</button>
+                                                {% else %}
+                                                    Yorum Eklemek için Üye olun!
+                                                {% endif %}
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="review_form_field">
-                                        <div class="input__box">
-                                            <span>Nickname</span>
-                                            <input id="nickname_field" type="text" name="nickname">
-                                        </div>
-                                        <div class="input__box">
-                                            <span>Summary</span>
-                                            <input id="summery_field" type="text" name="summery">
-                                        </div>
-                                        <div class="input__box">
-                                            <span>Review</span>
-                                            <textarea name="review"></textarea>
-                                        </div>
-                                        <div class="review-form-actions">
-                                            <button>Submit Review</button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <!-- End Single Tab Content -->
@@ -258,61 +279,19 @@
                         <aside class="widget comment_widget">
                             <h3 class="widget-title">Comments</h3>
                             <ul>
-                                <li>
-                                    <div class="post-wrapper">
-                                        <div class="thumb">
-                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
+                                {% for com in comments %}
+                                    <li>
+                                        <div class="post-wrapper">
+                                            <div class="thumb">
+                                                <img src="images/blog/comment/1.jpeg" alt="Comment images">
+                                            </div>
+                                            <div class="content">
+                                                <p>{{ com.user.first_name }} says:</p>
+                                                <a href="#">{{ com.comment }}</a>
+                                            </div>
                                         </div>
-                                        <div class="content">
-                                            <p>demo says:</p>
-                                            <a href="#">Quisque semper nunc vitae...</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-wrapper">
-                                        <div class="thumb">
-                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
-                                        </div>
-                                        <div class="content">
-                                            <p>Admin says:</p>
-                                            <a href="#">Curabitur aliquet pulvinar...</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-wrapper">
-                                        <div class="thumb">
-                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
-                                        </div>
-                                        <div class="content">
-                                            <p>Irin says:</p>
-                                            <a href="#">Quisque semper nunc vitae...</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-wrapper">
-                                        <div class="thumb">
-                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
-                                        </div>
-                                        <div class="content">
-                                            <p>Boighor says:</p>
-                                            <a href="#">Quisque semper nunc vitae...</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-wrapper">
-                                        <div class="thumb">
-                                            <img src="images/blog/comment/1.jpeg" alt="Comment images">
-                                        </div>
-                                        <div class="content">
-                                            <p>demo says:</p>
-                                            <a href="#">Quisque semper nunc vitae...</a>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </aside>
                         <!-- End Single Widget -->

@@ -50,8 +50,10 @@ def references(request):
 
 
 def photo_detail(request, id, slug):
+    # category=Category.objects.all()
     setting = Setting.objects.get(pk=1)
     photo = Photo.objects.get(pk=id)
     images = Images.objects.filter(photo=id)
-    context = {'setting': setting, 'photo': photo, 'imgofphoto': images}
+    comments = Comment.objects.filter(photo_id=id, status='True')
+    context = {'setting': setting, 'photo': photo, 'imgofphoto': images, 'comments': comments}
     return render(request, 'Pages/photoDetail.html', context)
