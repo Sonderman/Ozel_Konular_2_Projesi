@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from photo.models import *
+from .forms import SearchForm
 from .models import *
 
 
@@ -57,3 +58,15 @@ def photo_detail(request, id, slug):
     comments = Comment.objects.filter(photo_id=id, status='True')
     context = {'setting': setting, 'photo': photo, 'imgofphoto': images, 'comments': comments}
     return render(request, 'Pages/photoDetail.html', context)
+
+
+def photo_search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            photos = Photo.objects.filter(title__icontains=query)
+            context = {'photos': photos, 'category': category, }
+            return render(request, 'Pages/photo_search.html', context)
+    return HttpResponseRedirect('/')
