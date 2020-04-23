@@ -60,11 +60,21 @@
                                                                         <div class="rating-summary d-flex">
                                                                             <span>Rate</span>
                                                                             <ul class="rating d-flex">
-                                                                                <li {% if com.rate < 1 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
-                                                                                <li {% if com.rate < 2 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
-                                                                                <li {% if com.rate < 3 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
-                                                                                <li {% if com.rate < 4 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
-                                                                                <li {% if com.rate < 5 %} class="off" {% endif %}><i class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 1 %}
+                                                                                    class="off" {% endif %}><i
+                                                                                        class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 2 %}
+                                                                                    class="off" {% endif %}><i
+                                                                                        class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 3 %}
+                                                                                    class="off" {% endif %}><i
+                                                                                        class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 4 %}
+                                                                                    class="off" {% endif %}><i
+                                                                                        class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 5 %}
+                                                                                    class="off" {% endif %}><i
+                                                                                        class="zmdi zmdi-star"></i></li>
                                                                             </ul>
                                                                         </div>
 
@@ -112,6 +122,7 @@
                                             </div>
                                         {% endfor %}
                                     {% endif %}
+
                                     <form action="/photo/addcomment/{{ photo.id }}" method="post">
                                         {% csrf_token %}
                                         <div class="review_form_field">
@@ -163,12 +174,34 @@
                         <!-- Start Single Widget -->
                         <aside class="widget search_widget">
                             <h3 class="widget-title">Search</h3>
-                            <form action="#">
+                            {% load mptt_tags %}
+                            <form action="/search/" method="post">
+                                {% csrf_token %}
                                 <div class="form-input">
-                                    <input type="text" placeholder="Search...">
+                                    <input type="text" id="query" name="query"
+                                           placeholder="Search entire photos here...">
                                     <button><i class="fa fa-search"></i></button>
                                 </div>
+
+                                <label>
+                                    <select name="catid">
+                                        <option value="0">All Categories</option>
+                                        {% recursetree category %}
+                                            {% if node.is_leaf_node %}
+                                                <option value="{{ node.id }}">{{ node.title }}</option>
+                                            {% endif %}
+                                            {% if not node.is_leaf_node %}
+                                                <optgroup label="{{ node.title }}">
+                                                    {{ children }}
+                                                </optgroup>
+                                            {% endif %}
+
+                                        {% endrecursetree %}
+                                    </select>
+                                </label>
+
                             </form>
+
                         </aside>
                         <!-- End Single Widget -->
 

@@ -5,6 +5,7 @@ from django.contrib import messages
 from photo.models import *
 from .forms import SearchForm
 from .models import *
+import json
 
 
 def index(request):
@@ -51,12 +52,13 @@ def references(request):
 
 
 def photo_detail(request, id, slug):
-    # category=Category.objects.all()
+    category = Category.objects.all()
     setting = Setting.objects.get(pk=1)
     photo = Photo.objects.get(pk=id)
     images = Images.objects.filter(photo=id)
     comments = Comment.objects.filter(photo_id=id, status='True')
-    context = {'setting': setting, 'photo': photo, 'imgofphoto': images, 'comments': comments}
+    context = {'setting': setting, 'photo': photo, 'imgofphoto': images, 'comments': comments, 'category': category}
+    # return HttpResponse(category)
     return render(request, 'Pages/photoDetail.html', context)
 
 
@@ -66,7 +68,27 @@ def photo_search(request):
         if form.is_valid():
             category = Category.objects.all()
             query = form.cleaned_data['query']
-            photos = Photo.objects.filter(title__icontains=query)
+            catid = form.cleaned_data['catid']
+            if catid == 0:
+                photos = Photo.objects.filter(title__icontains=query)
+            else:
+                photos = Photo.objects.filter(title__icontains=query, category_id=catid)
             context = {'photos': photos, 'category': category, }
             return render(request, 'Pages/photo_search.html', context)
     return HttpResponseRedirect('/')
+
+
+def search_auto(request):
+    if request.is_ajax():
+        q = request.GET.get('term', '')
+        photo = Photo.objects.filter(city__icontains=q)
+        results = []
+        for ph in photo:
+            photo_json = {}
+            photo_json = ph.title
+            results.append(photo_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
