@@ -126,7 +126,6 @@
                 <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
 
 
-
                     <li class="shop_search"><a class="search__active" href="../static/#"></a></li>
 
 
@@ -213,36 +212,44 @@
                     <li class="setting__bar__icon"><a class="setting__active" href="../static/#"></a>
                         <div class="searchbar__content setting__block">
                             <div class="content-inner">
-                                <div class="switcher-currency">
-                                    <strong class="label switcher-label">
-                                        <span>Currency</span>
-                                    </strong>
-                                    <div class="switcher-options">
-                                        <div class="switcher-currency-trigger">
-                                            <span class="currency-trigger">USD - US Dollar</span>
-                                            <ul class="switcher-dropdown">
-                                                <li>GBP - British Pound Sterling</li>
-                                                <li>EUR - Euro</li>
-                                            </ul>
+
+                                {% if user.id is not None %}
+
+                                    <div class="switcher-currency">
+                                        <strong class="label switcher-label">
+                                            <span>My Account-{{ user.first_name }}</span>
+                                        </strong>
+                                        <div class="switcher-options">
+                                            <div class="switcher-currency-trigger">
+                                                <div class="setting__menu">
+
+                                                    <span><a href="../static/#">My Account</a></span>
+                                                    <span><a href="../static/#">My Comments</a></span>
+                                                    <span><a href="/logout/">Logout</a></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="switcher-currency">
-                                    <strong class="label switcher-label">
-                                        <span>Language</span>
-                                    </strong>
-                                    <div class="switcher-options">
-                                        <div class="switcher-currency-trigger">
-                                            <span class="currency-trigger">English01</span>
-                                            <ul class="switcher-dropdown">
-                                                <li>English02</li>
-                                                <li>English03</li>
-                                                <li>English04</li>
-                                                <li>English05</li>
-                                            </ul>
+
+                                {% else %}
+
+                                    <div class="switcher-currency">
+                                        <strong class="label switcher-label">
+                                            <span>log In OR Create Account</span>
+                                        </strong>
+                                        <div class="switcher-options">
+                                            <div class="switcher-currency-trigger">
+                                                <div class="setting__menu">
+                                                    <span><a href="/login/">Sign In</a></span>
+                                                    <span><a href="/register/">Create An Account</a></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+
+                                {% endif %}
+
+                                <!--
                                 <div class="switcher-currency">
                                     <strong class="label switcher-label">
                                         <span>Select Store</span>
@@ -259,22 +266,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="switcher-currency">
-                                    <strong class="label switcher-label">
-                                        <span>My Account</span>
-                                    </strong>
-                                    <div class="switcher-options">
-                                        <div class="switcher-currency-trigger">
-                                            <div class="setting__menu">
-                                                <span><a href="../static/#">Compare Product</a></span>
-                                                <span><a href="../static/#">My Account</a></span>
-                                                <span><a href="../static/#">My Wishlist</a></span>
-                                                <span><a href="../static/#">Sign In</a></span>
-                                                <span><a href="../static/#">Create An Account</a></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                -->
                             </div>
                         </div>
                     </li>
