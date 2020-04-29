@@ -81,7 +81,7 @@ def photo_search(request):
 def search_auto(request):
     if request.is_ajax():
         q = request.GET.get('term', '')
-        photo = Photo.objects.filter(city__icontains=q)
+        photo = Photo.objects.filter(title__icontains=q)
         results = []
         for ph in photo:
             photo_json = {}
