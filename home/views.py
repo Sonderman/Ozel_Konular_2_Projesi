@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from photo.models import *
-from .forms import SearchForm
+from .forms import SearchForm, SignUpForm
 from .models import *
 import json
 
@@ -114,7 +114,16 @@ def login_view(request):
     return render(request, 'Pages/login.html')
 
 
-def register_view(request):
-    #if request.method == 'POST':
-
-    return render(request, 'Pages/register.html')
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect('/')
+    form = SignUpForm()
+    context = {'form': form}
+    return render(request, 'Pages/signup.html', context)

@@ -1,5 +1,5 @@
 {% extends 'HomeBase.html' %}
-{% block title %}Register{% endblock %}
+{% block title %}Sign Up{% endblock %}
 {% block keywords %}{{ setting.keywords }}{% endblock %}
 {% block description %}{{ setting.description }}{% endblock %}
 {% block icon %}{{ setting.icon }}{% endblock %}
@@ -36,7 +36,27 @@
                         {% endfor %}
                     {% endif %}
                     <div class="my__account__wrapper">
-                        <h3 class="account__title">Register</h3>
+                        <h3 class="account__title">Register Form</h3>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <p>
+                                {{ field.label_tag }}<br>
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <small style="color: grey">{{ field.help.text }}</small>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                <p  style="color: red">{{ error }}</p>
+                                {% endfor %}
+                                </p>
+                            {% endfor %}
+                        <button type="submit">Sign Up</button>
+                        </form>
+
+
+
                         <form action="" method="post">
                             {% csrf_token %}
                             <div class="account__form">
@@ -53,6 +73,8 @@
                                 </div>
                             </div>
                         </form>
+
+
                     </div>
                 </div>
             </div>
