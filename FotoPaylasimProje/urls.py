@@ -25,6 +25,7 @@ Burası sitemizin Routing kısmının ayarlandığı yer
 urlpatterns = [
     path('', include('home.urls')),
     path('photo/', include('photo.urls')),
+    path('user/', include('user.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('search_auto/', views.search_auto, name='search_auto'),

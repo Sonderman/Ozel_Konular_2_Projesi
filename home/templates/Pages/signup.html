@@ -26,58 +26,58 @@
     <section class="my_account_area pt--80 pb--55 bg--white">
         <div class="container">
 
-            <div class="text-center">
-                <div class="col-lg-6 col-12">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}" role="alert">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    <div class="my__account__wrapper">
-                        <h3 class="account__title">Register Form</h3>
 
-                        <form method="post">
-                            {% csrf_token %}
-                            {% for field in form %}
-                                <p>
+            <div class="col-lg-6 col-12">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="my__account__wrapper">
+                    <h3 class="account__title">Register Form</h3>
+
+                    <form  method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <p>
                                 {{ field.label_tag }}<br>
                                 {{ field }}
                                 {% if field.help_text %}
-                                    <small style="color: grey">{{ field.help.text }}</small>
+                                    <small style="color: grey">{{ field.help_text }}</small>
                                 {% endif %}
                                 {% for error in field.errors %}
-                                <p  style="color: red">{{ error }}</p>
+                                    <p style="color: red">{{ error }}</p>
                                 {% endfor %}
-                                </p>
-                            {% endfor %}
-                        <button type="submit">Sign Up</button>
-                        </form>
+                            </p>
+                        {% endfor %}
+
+                        <input class="button" type="submit" value="Sign UP">
+                    </form>
 
 
+                    <form action="" method="post">
 
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <div class="account__form">
-                                <div class="input__box">
-                                    <label>Email address <span>*</span></label>
-                                    <input type="email">
-                                </div>
-                                <div class="input__box">
-                                    <label>Password<span>*</span></label>
-                                    <input type="password">
-                                </div>
-                                <div class="form__btn">
-                                    <button>Register</button>
-                                </div>
+                        <div class="account__form">
+                            <div class="input__box">
+                                <label>Email address <span>*</span></label>
+                                <input type="email">
                             </div>
-                        </form>
+                            <div class="input__box">
+                                <label>Password<span>*</span></label>
+                                <input type="password">
+                            </div>
+                            <div class="form__btn">
+                                <button>Register</button>
+                            </div>
+                        </div>
+                    </form>
 
 
-                    </div>
                 </div>
             </div>
+
         </div>
     </section>
 

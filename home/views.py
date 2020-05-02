@@ -11,7 +11,7 @@ import json
 
 def index(request):
     # data = Photo.objects.all().order_by('-id')[4]
-    # data = Photo.objects.all().order_by('?')[4]
+    # data = Photo.objects.all().order_by('?')[:4]
     # photo = Photo.objects.filter(category_id=id
     setting = Setting.objects.get(pk=1)
     sliderdata = Photo.objects.all()[:4]
@@ -117,13 +117,18 @@ def login_view(request):
 def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
+        print("SignUp girdi")
+
         if form.is_valid():
+            print("SignUp Valid Oldu")
             form.save()
             username = request.POST['username']
             password = request.POST['password1']
             user = authenticate(request, username=username, password=password)
             login(request, user)
             return HttpResponseRedirect('/')
+        else:
+            messages.warning(request, "SignUp Failed!!")
     form = SignUpForm()
     context = {'form': form}
     return render(request, 'Pages/signup.html', context)
