@@ -132,3 +132,8 @@ def signup_view(request):
     form = SignUpForm()
     context = {'form': form}
     return render(request, 'Pages/signup.html', context)
+
+
+def randphoto(request):
+    randphotoid = Photo.objects.order_by('?')[:1]
+    return HttpResponseRedirect('/photo/'+str(randphotoid[0].id)+'/'+str(randphotoid[0].slug))

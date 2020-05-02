@@ -9,4 +9,5 @@ urlpatterns = [
     path('references', views.references, name='references'),
     path('photo/<int:id>/<slug:slug>', views.photo_detail, name='photoDetail'),
     path('search/', views.photo_search, name='photo_search'),
+    path('RandPhoto/', views.randphoto, name='randphoto')
 ]
