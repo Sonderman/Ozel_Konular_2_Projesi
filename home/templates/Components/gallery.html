@@ -1,31 +1,38 @@
 <!-- Start Portfolio Area -->
 <section class="wn__portfolio__area gallery__masonry__activation bg--white mt--40 pb--100">
     <div class="container-fluid">
+    <!--
+        {% if page != 'category_view' %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="gallery__menu">
+                        <button data-filter="*" class="is-checked">Filter - All</button>
+                        {% for ct in category %}
+                            <button data-filter=".cat--{{ ct.id }}">{{ ct.title }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    -->
+    {% if page != 'category_view' %}
+        {% load mptt_tags %}
         <div class="row">
             <div class="col-lg-12">
                 <div class="gallery__menu">
                     <button data-filter="*" class="is-checked">Filter - All</button>
-                    {% for ct in category %}
-                        <button data-filter=".cat--{{ ct.id }}">{{ ct.title }}</button>
-                    {% endfor %}
+                    {% recursetree category %}
+
+                            {% if  node.is_leaf_node %}
+                                <button data-filter=".cat--{{ node.id }}">{{ node.title }}</button>
+                            {% endif %}
+                        {{ children }}
+                    {% endrecursetree %}
                 </div>
             </div>
         </div>
-        <!--
-    {% load mptt_tags %}
-<ul>
-    {% recursetree category %}
-        <li>
-            {{ node.title }}
-            {% if not node.is_leaf_node %}
-                <ul class="children">
-                    {{ children }}
-                </ul>
-            {% endif %}
-        </li>
-    {% endrecursetree %}
-</ul>
-        -->
+    {% endif %}
+
 
         <div class="row masonry__wrap">
             {% for ph in photos %}

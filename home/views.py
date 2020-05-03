@@ -12,13 +12,20 @@ import json
 def index(request):
     # data = Photo.objects.all().order_by('-id')[4]
     # data = Photo.objects.all().order_by('?')[:4]
-    # photo = Photo.objects.filter(category_id=id
+    # photo = Photo.objects.filter(category_id=id)
     setting = Setting.objects.get(pk=1)
     sliderdata = Photo.objects.all()[:4]
     category = Category.objects.all()
     photos = Photo.objects.all()[:10]
     context = {'setting': setting, 'sliderdata': sliderdata, 'category': category, 'photos': photos}
     return render(request, 'index.html', context)
+
+
+def category_view(request, id, slug):
+    category = Category.objects.all()
+    photos = Photo.objects.filter(category_id=id)
+    context = {'category': category, 'photos': photos, 'page': 'category_view'}
+    return render(request, 'Pages/categoryGallery.html', context)
 
 
 def contact(request):
@@ -35,20 +42,23 @@ def contact(request):
             messages.success(request, "Your message has been succesfully sent, Thank you")
             return HttpResponseRedirect('/contact')
     setting = Setting.objects.get(pk=1)
+    category = Category.objects.all()
     form = ContactForm()
-    context = {'setting': setting, 'form': form}
+    context = {'category': category, 'setting': setting, 'form': form}
     return render(request, 'Pages/contactPage.html', context)
 
 
 def aboutus(request):
+    category = Category.objects.all()
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting}
+    context = {'category': category, 'setting': setting}
     return render(request, 'Pages/aboutUsPage.html', context)
 
 
 def references(request):
+    category = Category.objects.all()
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting}
+    context = {'category': category, 'setting': setting}
     return render(request, 'Pages/referencesPage.html', context)
 
 
@@ -101,6 +111,7 @@ def logout_view(request):
 
 
 def login_view(request):
+    category = Category.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -111,10 +122,11 @@ def login_view(request):
         else:
             messages.warning(request, "Login Failed!!")
             return HttpResponseRedirect('/login')
-    return render(request, 'Pages/login.html')
+    return render(request, 'Pages/login.html', {'category': category})
 
 
 def signup_view(request):
+    category = Category.objects.all()
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         print("SignUp girdi")
@@ -130,10 +142,10 @@ def signup_view(request):
         else:
             messages.warning(request, "SignUp Failed!!")
     form = SignUpForm()
-    context = {'form': form}
+    context = {'form': form, 'category': category}
     return render(request, 'Pages/signup.html', context)
 
 
 def randphoto(request):
     randphotoid = Photo.objects.order_by('?')[:1]
-    return HttpResponseRedirect('/photo/'+str(randphotoid[0].id)+'/'+str(randphotoid[0].slug))
+    return HttpResponseRedirect('/photo/' + str(randphotoid[0].id) + '/' + str(randphotoid[0].slug))

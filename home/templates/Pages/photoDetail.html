@@ -2,7 +2,7 @@
 {% block title %}{{ setting.title }}{% endblock %}
 {% block keywords %}{{ setting.keywords }}{% endblock %}
 {% block description %}{{ setting.description }}{% endblock %}
-{% block icon %}{{ setting.icon }}{% endblock %}
+{% block icon %}{{setting.icon.url}}{% endblock %}
 
 {% block body %}
 
@@ -166,7 +166,6 @@
                             <!-- End Single Tab Content -->
                         </div>
                     </div>
-
 
                 </div>
                 <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
