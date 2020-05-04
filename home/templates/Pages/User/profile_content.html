@@ -6,9 +6,21 @@
                     <table>
                         <thead>
                         <tr class="title-top">
-                            <th class="product-thumbnail">Name Surname:</th>
+                            <th class="product-thumbnail">
+                                <div class="cartbox__btn">
+                                    <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                                        <li><a href="/user/update">Update Profile</a></li>
+                                        <li><a href="/user/password">Change Password</a></li>
+                                    </ul>
+                                </div>
+                            </th>
                             <td class="product-name"><img src="{{ profile.image.url }}"
                                                           alt="product img"></td>
+                        </tr>
+                        <tr class="title-top">
+                            <th class="product-thumbnail">Name Surname:</th>
+                            <td class="product-name">{{ profile.user.first_name }} {{ profile.user.last_name }}
+                            </td>
                         </tr>
                         </thead>
                         <thead>
@@ -26,7 +38,7 @@
                         <thead>
                         <tr class="title-top">
                             <th class="product-thumbnail">Address:</th>
-                            <td class="product-name">{{ profile.address}}</td>
+                            <td class="product-name">{{ profile.address }}</td>
                         </tr>
                         </thead>
                         <thead>

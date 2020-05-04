@@ -171,6 +171,7 @@
                                 {% if user.id is not None %}
 
                                     <div class="switcher-currency">
+                                    <img src="{{ user.userprofile.image.url }}">
                                         <strong class="label switcher-label">
                                             <span>My Account-{{ user.first_name }}</span>
                                         </strong>

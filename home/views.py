@@ -140,7 +140,7 @@ def signup_view(request):
             login(request, user)
             return HttpResponseRedirect('/')
         else:
-            messages.warning(request, "SignUp Failed!!")
+            messages.warning(request, "SignUp Failed!!<br>"+str(form.errors))
     form = SignUpForm()
     context = {'form': form, 'category': category}
     return render(request, 'Pages/signup.html', context)
