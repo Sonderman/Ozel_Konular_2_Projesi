@@ -90,6 +90,7 @@ def photo_search(request):
 
 
 def search_auto(request):
+    print("çalıştı")
     if request.is_ajax():
         q = request.GET.get('term', '')
         photo = Photo.objects.filter(title__icontains=q)
@@ -137,10 +138,15 @@ def signup_view(request):
             username = request.POST['username']
             password = request.POST['password1']
             user = authenticate(request, username=username, password=password)
+            user_profile = UserProfile()
+            user_profile.user = user
+            user_profile.phone = 0
+            user_profile.image = "assets/images/logo.png"
+            user_profile.save()
             login(request, user)
             return HttpResponseRedirect('/')
         else:
-            messages.warning(request, "SignUp Failed!!<br>"+str(form.errors))
+            messages.warning(request, "SignUp Failed!!<br>" + str(form.errors))
     form = SignUpForm()
     context = {'form': form, 'category': category}
     return render(request, 'Pages/signup.html', context)

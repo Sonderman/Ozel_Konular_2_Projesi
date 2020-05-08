@@ -2,7 +2,7 @@
 {% block title %}{{ setting.title }}{% endblock %}
 {% block keywords %}{{ setting.keywords }}{% endblock %}
 {% block description %}{{ setting.description }}{% endblock %}
-{% block icon %}{{setting.icon.url}}{% endblock %}
+{% block icon %}{{ setting.icon.url }}{% endblock %}
 
 {% block body %}
 
@@ -12,8 +12,8 @@
                 <div class="col-lg-9 col-12">
                     <div class="wn__single__product">
 
-
                         {% include "Components/slideofphoto.html" %}
+
 
                     </div>
 
@@ -39,7 +39,7 @@
                                                 <li>
                                                     <div class="wn__comment">
                                                         <div class="thumb">
-                                                            <img src="{{ com.user.image.url }}" alt="image">
+                                                            <img src="{{ com.userprofil.image.url }}" alt="image">
                                                         </div>
                                                         <div class="content">
 
@@ -168,6 +168,27 @@
                     </div>
 
                 </div>
+
+
+                <script>
+
+                    $(function () {
+                        $("#query").autocomplete({
+                            source: "/search_auto/",
+                            select: function (event, ui) { //item selected
+                                AutoCompleteSelectHandler(event, ui)
+                            },
+                            minLength: 2,
+                        });
+                    });
+
+                    function AutoCompleteSelectHandler(event, ui) {
+                        var selectedObj = ui.item;
+                    }
+
+                </script>
+
+
                 <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
                     <div class="wn__sidebar">
                         <!-- Start Single Widget -->

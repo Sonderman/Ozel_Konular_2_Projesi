@@ -8,6 +8,8 @@ from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
 from mptt.models import MPTTModel, TreeForeignKey
 
+from home.models import UserProfile
+
 
 class Category(MPTTModel):
     STATUS = (
@@ -96,6 +98,7 @@ class Comment(models.Model):
         ('False', 'Hayır'),
     )
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+    userprofil = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     subject = models.CharField(max_length=50, blank=True)
     comment = models.TextField(max_length=200, blank=True)
