@@ -2,7 +2,6 @@ from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
-
 from photo.models import *
 from .forms import SearchForm, SignUpForm
 from .models import *

@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from home.models import UserProfile, UserProfileForm
-from photo.models import Category
+from photo.models import Category, Comment
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
 
@@ -46,7 +47,7 @@ def change_password(request):
             messages.success(request, "Your password has been succesfully updated.")
             return redirect('change_password')
         else:
-            messages.warning(request, "Error!!.<br>"+str(form.errors))
+            messages.warning(request, "Error!!.<br>" + str(form.errors))
             return redirect('change_password')
     else:
         category = Category.objects.all()
@@ -55,5 +56,24 @@ def change_password(request):
             'category': category,
             'form': form,
         }
-        return render(request, 'Pages/User/change_password.html', context)
+        return render(request, 'Pages/User/update_profile.html', context)
+
+
+@login_required(login_url='/login')
+def comments(request):
+    category = Category.objects.all()
+    current_user = request.user
+    comment = Comment.objects.filter(user_id=current_user.id)
+    context = {
+        'category': category,
+        'comments': comment,
+    }
+    return render(request, 'Pages/User/commentsPage.html', context)
+
+@login_required(login_url='/login')
+def delete_comment(request,id):
+    current_user=request.user
+    Comment.objects.get(id=id,user_id=current_user.id).delete()
+    messages.success(request, "Your Comment is successfully deleted")
+    return  HttpResponseRedirect('/user/comments')
 
