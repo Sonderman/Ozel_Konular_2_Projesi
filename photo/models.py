@@ -1,8 +1,10 @@
+from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput, FileInput
+
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -53,7 +55,7 @@ class Photo(models.Model):
         ('True', 'Evet'),
         ('False', 'Hayır'),
     )
-
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     keywords = models.CharField(max_length=255)
@@ -75,6 +77,20 @@ class Photo(models.Model):
 
     def get_absolute_url(self):
         return reverse('photo_detail', kwargs={'slug': self.slug})
+
+
+class PhotoForm(ModelForm):
+    class Meta:
+        model = Photo
+        fields = ['title', 'slug', 'keywords', 'description', 'image', 'detail']
+        widgets = {
+            'title': TextInput(attrs={'class': 'input', 'placeholder': 'title'}),
+            'keywords': TextInput(attrs={'class': 'input', 'placeholder': 'keywords'}),
+            'description': TextInput(attrs={'class': 'input', 'placeholder': 'description'}),
+            'image': FileInput(attrs={'class': 'input', 'placeholder': 'image'}),
+            'slug': TextInput(attrs={'class': 'input', 'placeholder': 'slug'}),
+            'detail': CKEditorWidget(),
+        }
 
 
 class Images(models.Model):

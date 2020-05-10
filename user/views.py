@@ -4,8 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
+
+from content.models import Menu
 from home.models import UserProfile, UserProfileForm
-from photo.models import Category, Comment
+from photo.models import Category, Comment, Photo, PhotoForm
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
 
@@ -70,10 +72,83 @@ def comments(request):
     }
     return render(request, 'Pages/User/commentsPage.html', context)
 
-@login_required(login_url='/login')
-def delete_comment(request,id):
-    current_user=request.user
-    Comment.objects.get(id=id,user_id=current_user.id).delete()
-    messages.success(request, "Your Comment is successfully deleted")
-    return  HttpResponseRedirect('/user/comments')
 
+@login_required(login_url='/login')
+def delete_comment(request, id):
+    current_user = request.user
+    Comment.objects.get(id=id, user_id=current_user.id).delete()
+    messages.success(request, "Your Comment is successfully deleted")
+    return HttpResponseRedirect('/user/comments')
+
+
+@login_required(login_url='/login')
+def addphoto(request):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            current_user = request.user
+            data = Photo()
+            data.user_id = current_user.id
+            data.title = form.cleaned_data['title']
+            data.keywords = form.cleaned_data['keywords']
+            data.description = form.cleaned_data['description']
+            data.image = form.cleaned_data['image']
+            data.slug = form.cleaned_data['slug']
+            data.detail = form.cleaned_data['detail']
+            data.status = 'False'
+            data.category_id = 1
+            data.save()
+            messages.success(request, "Photo succesfully added")
+            return HttpResponseRedirect("/user/photos")
+        else:
+            messages.warning(request, "Error:" + str(form.errors))
+            return HttpResponseRedirect("/user/addphoto")
+    else:
+        category = Category.objects.all()
+        form = PhotoForm()
+        context = {
+            'category': category,
+            'form': form,
+        }
+        return render(request, 'Pages/User/add_photoPage.html', context)
+
+
+@login_required(login_url='/login')
+def photos(request):
+    category = Category.objects.all()
+    menu = Menu.objects.all()
+    photo = Photo.objects.filter(user_id=request.user.id)
+    context = {
+        'category': category,
+        'photos': photo,
+    }
+    return render(request, 'Pages/User/photosPage.html', context)
+
+
+@login_required(login_url='/login')
+def photoedit(request, id):
+    photo = Photo.objects.get(id=id)
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES, instance=photo)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Photo succesfully Edited")
+            return HttpResponseRedirect("/user/photos")
+        else:
+            messages.warning(request, "Error:" + str(form.errors))
+            return HttpResponseRedirect("/user/photoedit/"+str(id))
+    else:
+        category = Category.objects.all()
+        form = PhotoForm(instance=photo)
+        context = {
+            'category': category,
+            'form': form,
+        }
+        return render(request, 'Pages/User/add_photoPage.html', context)
+
+
+@login_required(login_url='/login')
+def photodelete(request, id):
+    Photo.objects.filter(id=id, user_id=request.user.id).delete()
+    messages.success(request, "Photo deleted..")
+    return HttpResponseRedirect('/user/photos')

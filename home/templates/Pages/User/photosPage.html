@@ -1,0 +1,126 @@
+{% extends 'HomeBase.html' %}
+{% block title %}Comments{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block icon %}{{ setting.icon }}{% endblock %}
+
+{% block body %}
+
+
+    <!-- Start Bradcaump area -->
+    <div class="ht__bradcaump__area bg-image--6">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">User Profile</h2>
+                        <nav class="bradcaump-content">
+                            <a class="breadcrumb_item" href="/">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb_item active">User Profile</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Bradcaump area -->
+    <!-- Start Shop Page -->
+    <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+        <div class="container">
+            <div class="row">
+
+                {% include "Pages/User/profile_left_panel.html" %}
+
+                <div class="col-lg-9 col-12 order-1 order-lg-2">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
+
+                                <p>
+                                <h1>Photos</h1></p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab__container">
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div style="color:#d43f3a;font-size: medium">
+                                    {{ message|safe }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <a href="/user/addphoto" class="btn-primary">Add Photo</a>
+                        <table>
+
+                            <tr>
+                                <th>
+                                    Photo
+                                </th>
+
+                                <th>
+                                    Title
+                                </th>
+
+                                <th>
+                                    Subject
+                                </th>
+
+                                <th>
+                                    Comment
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+
+
+                            {% for ph in photos %}
+                                <tr>
+                                    <td>
+                                        <img height="50" src="{{ ph.image.url }}">
+                                    </td>
+
+                                    <td>
+                                        <a href="/photo/{{ ph.id }}/{{ ph.slug }}">
+                                            <strong>{{ ph.title }}</strong></a>
+                                    </td>
+
+                                    <td>
+                                        {{ ph.subject }}
+                                    </td>
+
+                                    <td>
+                                        {{ ph.comment }}
+                                    </td>
+
+                                    <td>
+                                        {{ ph.status }}
+                                    </td>
+                                    <td>
+                                        <a class="btn-success" href="/user/photoedit/{{ ph.id }}"
+                                        >EDIT</a>
+                                        <a class="btn-danger" href="/user/photodelete/{{ ph.id }}"
+                                           onclick="return confirm('Will be Deleted! Are you Sure?')">DELETE</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
