@@ -2,6 +2,8 @@ from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
+
+from content.models import Menu, Content
 from photo.models import *
 from .forms import SearchForm, SignUpForm
 from .models import *
@@ -15,8 +17,10 @@ def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Photo.objects.all()[:4]
     category = Category.objects.all()
+    menu = Menu.objects.all()
+    # lastphotos = Content.objects.filter(type='photo').order_by('-id')[:4]
     photos = Photo.objects.all()[:10]
-    context = {'setting': setting, 'sliderdata': sliderdata, 'category': category, 'photos': photos}
+    context = {'setting': setting, 'sliderdata': sliderdata, 'category': category, 'photos': photos, 'menu': menu}
     return render(request, 'index.html', context)
 
 
@@ -154,3 +158,17 @@ def signup_view(request):
 def randphoto(request):
     randphotoid = Photo.objects.order_by('?')[:1]
     return HttpResponseRedirect('/photo/' + str(randphotoid[0].id) + '/' + str(randphotoid[0].slug))
+
+
+def menu(request, id):
+    content = Content.objects.get(menu_id=id)
+    if content.id:
+        link = '/content/' + str(content.id) + '/menu'
+        return HttpResponseRedirect(link)
+    else:
+        messages.warning(request, "Error! Content not found!")
+        return HttpResponseRedirect("/")
+
+
+def error(request):
+    return render(request, 'Pages/error_page.html')
