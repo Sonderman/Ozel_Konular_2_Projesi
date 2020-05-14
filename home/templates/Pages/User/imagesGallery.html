@@ -1,0 +1,41 @@
+{% extends "homebase.html" %}
+
+{% block clean %}
+    <div class="col">
+        <div class="fotorama" data-nav="thumbs" data-width="600">
+            {% for  rs in images %}
+                <img src="{{ rs.image.url }}" alt="{{ rs.title }}">
+            {% endfor %}
+        </div>
+        <table style="width:100%; margin-bottom: 30px">
+            <tr>
+                <th style="background-color: whitesmoke">Title</th>
+                <th style="background-color: whitesmoke">Image</th>
+                <th style="background-color: whitesmoke">Actions</th>
+            </tr>
+            {% for rs in images %}
+                <tr>
+                    <td>
+                        {{ rs.title }}
+                    </td>
+                    <td>
+                        <img src="{{ rs.image.url }}" style="height: 30px; width: auto">
+                    </td>
+                    <td><a class="btn btn-2" href="/photo/gallerydelete/{{ rs.id }}"
+                           onclick="return confirm('Will be delete ! Are you sure ?')">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="row">
+            <form action="/photo/galleryadd/{{ id }}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form.as_p }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-2" type="submit">Add Image</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

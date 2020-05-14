@@ -27,7 +27,7 @@ class Setting(models.Model):
     icon = models.ImageField(blank=True, upload_to='assets/images/', max_length=255)
     facebook = models.CharField(blank=True, max_length=50)
     twitter = models.CharField(blank=True, max_length=50)
-    instagram = models.CharField(blank=True, max_length=50)
+    linkedin = models.CharField(blank=True, max_length=50)
     aboutus = RichTextUploadingField(blank=True)
     contact = RichTextUploadingField(blank=True)
     references = RichTextUploadingField(blank=True)

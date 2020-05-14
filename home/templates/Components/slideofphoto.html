@@ -2,10 +2,8 @@
 
 
 <div class="fotorama" data-nav="thumbs">
-
     <a href="{{ photo.id }}.jpg"><img src="{{ photo.image.url }}" alt=""></a>
     {% for img in imgofphoto %}
         <a href="{{ img.id }}.jpg"><img src="{{ img.image.url }}" alt=""></a>
     {% endfor %}
 </div>
-

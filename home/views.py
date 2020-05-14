@@ -19,7 +19,7 @@ def index(request):
     category = Category.objects.all()
     menu = Menu.objects.all()
     # lastphotos = Content.objects.filter(type='photo').order_by('-id')[:4]
-    photos = Photo.objects.all()[:10]
+    photos = Photo.objects.filter(status='True')[:10]
     context = {'setting': setting, 'sliderdata': sliderdata, 'category': category, 'photos': photos, 'menu': menu}
     return render(request, 'index.html', context)
 

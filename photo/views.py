@@ -33,3 +33,37 @@ def addcomment(request, id):
             return HttpResponseRedirect(url)
     messages.warning(request, "Error Occured!!")
     return HttpResponseRedirect(url)
+
+
+
+@login_required(login_url='/login')
+def gallery(request, id):
+    images = Images.objects.filter(photo_id=id)
+    form = ImagesForm()
+    context = {
+        'images': images,
+        'id': id,
+        'form': form,
+    }
+
+    return render(request, 'Pages/User/imagesGallery.html', context)
+
+
+@login_required(login_url='/login')
+def galleryadd(request, id):
+    if request.method == 'POST':  # form post edildiyse
+        form = ImagesForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = Images()
+            data.title = form.cleaned_data['title']
+            data.image = form.cleaned_data['image']
+            data.photo_id = id
+            data.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required(login_url='/login')
+def gallerydelete(request, id):
+    Images.objects.get(pk=id).delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+

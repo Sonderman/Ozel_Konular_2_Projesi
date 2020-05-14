@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
 from content.models import Menu
-from home.models import UserProfile, UserProfileForm
+from home.models import UserProfile, UserProfileForm, Setting
 from photo.models import Category, Comment, Photo, PhotoForm
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
@@ -14,8 +14,9 @@ from user.forms import UserUpdateForm, ProfileUpdateForm
 def index(request):
     current_user = request.user
     category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
     profile = UserProfile.objects.get(user_id=current_user.id)
-    context = {'category': category, 'profile': profile}
+    context = {'category': category, 'setting': setting, 'profile': profile}
     return render(request, 'Pages/User/profile_main.html', context)
 
 
@@ -58,7 +59,7 @@ def change_password(request):
             'category': category,
             'form': form,
         }
-        return render(request, 'Pages/User/update_profile.html', context)
+        return render(request, 'Pages/User/change_password.html', context)
 
 
 @login_required(login_url='/login')
@@ -96,7 +97,7 @@ def addphoto(request):
             data.slug = form.cleaned_data['slug']
             data.detail = form.cleaned_data['detail']
             data.status = 'False'
-            data.category_id = 1
+            data.category_id = form.cleaned_data['category'].id
             data.save()
             messages.success(request, "Photo succesfully added")
             return HttpResponseRedirect("/user/photos")
@@ -117,7 +118,7 @@ def addphoto(request):
 def photos(request):
     category = Category.objects.all()
     menu = Menu.objects.all()
-    photo = Photo.objects.filter(user_id=request.user.id)
+    photo = Photo.objects.filter(user_id=request.user.id, status='True')
     context = {
         'category': category,
         'photos': photo,
@@ -131,12 +132,14 @@ def photoedit(request, id):
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES, instance=photo)
         if form.is_valid():
-            form.save()
+            photo = form.save(commit=False)
+            photo.status = 'False'
+            photo.save()
             messages.success(request, "Photo succesfully Edited")
             return HttpResponseRedirect("/user/photos")
         else:
             messages.warning(request, "Error:" + str(form.errors))
-            return HttpResponseRedirect("/user/photoedit/"+str(id))
+            return HttpResponseRedirect("/user/photoedit/" + str(id))
     else:
         category = Category.objects.all()
         form = PhotoForm(instance=photo)

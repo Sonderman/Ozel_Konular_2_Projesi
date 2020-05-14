@@ -49,7 +49,7 @@ class Content(models.Model):
     title = models.CharField(max_length=150)
     keywords = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='images/', max_length=255)  # py -m pip install --upgrade Pillo
+    image = models.ImageField(upload_to='images/', max_length=255)  # py -m pip install --upgrade Pillow
     detail = RichTextUploadingField(blank=True)
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField(null=False, unique=True)
@@ -71,7 +71,7 @@ class Content(models.Model):
 class CImages(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     title = models.CharField(max_length=150, blank=True)
-    image = models.ImageField( upload_to='images/', max_length=255)  # py -m pip install --upgrade Pillo
+    image = models.ImageField(upload_to='images/', max_length=255)  # py -m pip install --upgrade Pillo
 
     def __str__(self):
         return self.title

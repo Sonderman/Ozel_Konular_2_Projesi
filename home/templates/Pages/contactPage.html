@@ -6,7 +6,6 @@
 
 {% block body %}
 
-
     <div class="ht__bradcaump__area bg-image--5">
         <div class="container">
             <div class="row">
@@ -23,6 +22,7 @@
             </div>
         </div>
     </div>
+
     <section class="wn_contact_area bg--white pt--80 pb--80">
         <!--
         {% if messages %}
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-lg-4 col-12 md-mt-40 sm-mt-40">
                     <div class="wn__address">
-                        <h2 class="contact__title">Get office info.</h2>
+                        <h2 class="contact__title">INFO</h2>
                         <p>{{ setting.contact|safe }} </p>
                         <div class="wn__addres__wreapper">
 
@@ -88,7 +88,7 @@
                                 <i class="icon-location-pin icons"></i>
                                 <div class="content">
                                     <span>address:</span>
-                                    <p>666 5th Ave New York, NY, United</p>
+                                    <p>{{ setting.address }}</p>
                                 </div>
                             </div>
 
@@ -96,7 +96,7 @@
                                 <i class="icon-phone icons"></i>
                                 <div class="content">
                                     <span>Phone Number:</span>
-                                    <p>716-298-1822</p>
+                                    <p>{{ setting.phone }}</p>
                                 </div>
                             </div>
 
@@ -104,18 +104,9 @@
                                 <i class="icon-envelope icons"></i>
                                 <div class="content">
                                     <span>Email address:</span>
-                                    <p>716-298-1822</p>
+                                    <p>{{ setting.email }}</p>
                                 </div>
                             </div>
-
-                            <div class="single__address">
-                                <i class="icon-globe icons"></i>
-                                <div class="content">
-                                    <span>website address:</span>
-                                    <p>716-298-1822</p>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>

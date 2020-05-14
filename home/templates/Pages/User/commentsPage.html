@@ -104,19 +104,17 @@
                                         {{ com.status }}
                                     </td>
                                     <td>
-                                        <a class="btn-danger" href="/user/deletecomment/{{ com.id }}"
-                                           onclick="return confirm('Will be Deleted! Are you Sure?')">DELETE</a>
+                                            <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                                                <li><a class="btn-danger" href="/user/deletecomment/{{ com.id }}"
+                                                       onclick="return confirm('Will be Deleted! Are you Sure?')"><p style="color:red;">DELETE</p></a>
+                                                </li>
+                                            </ul>
                                     </td>
                                 </tr>
                             {% endfor %}
                         </table>
-
-
                     </div>
-
                 </div>
-
-
             </div>
         </div>
     </div>

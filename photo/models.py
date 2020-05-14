@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from django.forms import ModelForm, TextInput, FileInput
+from django.forms import ModelForm, TextInput, FileInput, Select
 
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -82,11 +82,14 @@ class Photo(models.Model):
 class PhotoForm(ModelForm):
     class Meta:
         model = Photo
-        fields = ['title', 'slug', 'keywords', 'description', 'image', 'detail']
+        fields = ['category', 'title', 'slug', 'keywords', 'description', 'image', 'detail']
         widgets = {
             'title': TextInput(attrs={'class': 'input', 'placeholder': 'title'}),
             'keywords': TextInput(attrs={'class': 'input', 'placeholder': 'keywords'}),
             'description': TextInput(attrs={'class': 'input', 'placeholder': 'description'}),
+            'category': Select(attrs={'class': 'input', 'placeholder': 'type'}, choices=(
+                Category.objects.all()
+            )),
             'image': FileInput(attrs={'class': 'input', 'placeholder': 'image'}),
             'slug': TextInput(attrs={'class': 'input', 'placeholder': 'slug'}),
             'detail': CKEditorWidget(),
@@ -105,6 +108,15 @@ class Images(models.Model):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
 
     image_tag.short_description = 'Image'
+
+
+class ImagesForm(ModelForm):
+    class Meta:
+        model = Images
+        fields = ['title', 'image']
+
+
+
 
 
 class Comment(models.Model):

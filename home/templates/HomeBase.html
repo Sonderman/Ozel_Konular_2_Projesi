@@ -42,7 +42,7 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-
+{% block clean %}
 {% include 'header.html' %}
 <!-- Main wrapper -->
 <div class="wrapper" id="wrapper">
@@ -59,7 +59,7 @@
     {% include 'footer.html' %}
 </div>
 <!-- //Main wrapper -->
-
+{% endblock %}
 {% include 'jsFiles.html' %}
 
 </body>
