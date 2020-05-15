@@ -172,3 +172,10 @@ def menu(request, id):
 
 def error(request):
     return render(request, 'Pages/error_page.html')
+
+
+def faq(request):
+    category = Category.objects.all()
+    faq = FAQ.objects.all().order_by('ordernumber')
+    context = {'category': category, 'faq': faq}
+    return render(request, 'Pages/faqPage.html', context)

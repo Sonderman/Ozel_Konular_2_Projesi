@@ -1,0 +1,55 @@
+{% extends 'HomeBase.html' %}
+{% block title %}Frequently Asking Questions{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block icon %}{{ setting.icon.url }}{% endblock %}
+{% block head %}
+    <script>
+        $(function () {
+            $("#accordion").accordion();
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    {% include 'searchPopUp.html' %}
+
+    <div class="ht__bradcaump__area bg-image--5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">Frequently Asking Questions</h2>
+                        <nav class="bradcaump-content">
+                            <a class="breadcrumb_item" href="/">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb_item active">Frequently Asking Questions</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section-padding--lg bg--white">
+        <div class="container">
+            <div class="col-lg-12">
+
+
+                <div id="accordion">
+                    {% for fq in faq %}
+                    <h3>{{ fq.question }}</h3>
+                    <div>
+                        <p>
+                            {{ fq.answer }}
+                        </p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

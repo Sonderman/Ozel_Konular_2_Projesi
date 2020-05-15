@@ -32,33 +32,33 @@
     <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
 
 
-<!-- jQuery !-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<!-- jQuery UI !-->
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <!-- jQuery !-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- jQuery UI !-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 
     {% block head %}{% endblock %}
 </head>
 <body>
 {% block clean %}
-{% include 'header.html' %}
-<!-- Main wrapper -->
-<div class="wrapper" id="wrapper">
-    {% include 'searchPopUp.html' %}
+    {% include 'header.html' %}
+    <!-- Main wrapper -->
+    <div class="wrapper" id="wrapper">
+        {% include 'searchPopUp.html' %}
 
-    {% block body %}
+        {% block body %}
 
-        {% include 'Components/sliderArea.html' %}
-        {% include 'Components/gallery.html' %}
-        {% include "Components/slideofphoto.html" %}
+            {% include 'Components/sliderArea.html' %}
+            {% include 'Components/gallery.html' %}
+            {% include "Components/slideofphoto.html" %}
 
-    {% endblock %}
+        {% endblock %}
 
-    {% include 'footer.html' %}
-</div>
-<!-- //Main wrapper -->
+        {% include 'footer.html' %}
+    </div>
+    <!-- //Main wrapper -->
 {% endblock %}
 {% include 'jsFiles.html' %}
 
