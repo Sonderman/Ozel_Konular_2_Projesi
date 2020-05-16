@@ -1,23 +1,24 @@
 {% extends 'HomeBase.html' %}
-{% block title %}{{ setting.title }}{% endblock %}
-{% block keywords %}{{ setting.keywords }}{% endblock %}
-{% block description %}{{ setting.description }}{% endblock %}
-{% block icon %}{{ setting.icon }}{% endblock %}
+{% block title %}Update Profile{% endblock %}
+{% block keywords %}Update Profile{% endblock %}
+{% block description %}Update Profile{% endblock %}
+{% block icon %}{{ setting.icon.url }}{% endblock %}
 
 {% block body %}
 
-
     <!-- Start Bradcaump area -->
-    <div class="ht__bradcaump__area bg-image--6">
+    <div class="ht__bradcaump__area bg-image--5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">User Profile</h2>
+                        <h2 class="bradcaump-title">Update Profile</h2>
                         <nav class="bradcaump-content">
                             <a class="breadcrumb_item" href="/">Home</a>
                             <span class="brd-separetor">/</span>
-                            <span class="breadcrumb_item active">User Profile</span>
+                            <a class="breadcrumb_item" href="/user/profile">Profile</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb_item active">Update Profile</span>
                         </nav>
                     </div>
                 </div>
@@ -60,7 +61,7 @@
                                 {{ profile_form.as_p }}
                             </fieldset>
                             <div class="form-group">
-                                <input type="submit" value="Update">
+                                <input class="btn btn-primary" type="submit" value="Update">
 
                             </div>
 

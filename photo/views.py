@@ -2,14 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
-from home.models import UserProfile
 from .models import *
-
-
-# Create your views here.
-def index(request):
-    return HttpResponse("Image page")
 
 
 @login_required(login_url='/login')
@@ -28,12 +21,15 @@ def addcomment(request, id):
             data.comment = form.cleaned_data['comment']
             data.rate = form.cleaned_data['rate']
             data.ip = request.META.get('REMOTE_ADDR')
-            data.save()
+            try:
+                data.save()
+            except:
+                messages.warning(request, "Error Occured!!")
+                return HttpResponseRedirect(url)
             messages.success(request, "Your review Succesfully received, Thank you")
             return HttpResponseRedirect(url)
     messages.warning(request, "Error Occured!!")
     return HttpResponseRedirect(url)
-
 
 
 @login_required(login_url='/login')
@@ -66,4 +62,3 @@ def galleryadd(request, id):
 def gallerydelete(request, id):
     Images.objects.get(pk=id).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-

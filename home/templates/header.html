@@ -20,36 +20,37 @@
 
                         <li class="drop with--one--item"><a href="/">Home</a></li>
 
-                    {% if category %}
-                        <li class="drop"><a href="/">Categories</a>
-                            <div class="megamenu dropdown">
-                                <ul class="item item01">
+                        {% if category %}
+                            <li class="drop"><a href="/">Categories</a>
+                                <div class="megamenu dropdown">
+                                    <ul class="item item01">
 
-                                    {% recursetree category %}
+                                        {% recursetree category %}
 
-                                        {% if node.is_leaf_node %}
+                                            {% if node.is_leaf_node %}
 
-                                            <li><a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
-                                            </li>
+                                                <li>
+                                                    <a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                                                </li>
 
-                                        {% endif %}
+                                            {% endif %}
 
-                                        {% if not node.is_leaf_node %}
-                                            <li class="label2"><a href="/">{{ node.title }}</a>
-                                                <ul>
-                                                    {{ children }}
+                                            {% if not node.is_leaf_node %}
+                                                <li class="label2"><a href="/">{{ node.title }}</a>
+                                                    <ul>
+                                                        {{ children }}
 
-                                                </ul>
-                                            </li>
+                                                    </ul>
+                                                </li>
 
-                                        {% endif %}
+                                            {% endif %}
 
-                                    {% endrecursetree %}
+                                        {% endrecursetree %}
 
-                                </ul>
-                            </div>
-                        </li>
-                    {% endif %}
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endif %}
                         {% if menu %}
                             <li class="drop"><a href="/">Categories</a>
                                 <div class="megamenu dropdown">
@@ -207,7 +208,7 @@
 
                                     <div class="switcher-currency">
                                         <img src="{{ user.userprofile.image.url }}">
-                                        <strong class="label switcher-label">
+                                        <strong class="label">
                                             <span>My Account-{{ user.first_name }}</span>
                                         </strong>
                                         <div class="switcher-options">
@@ -215,7 +216,8 @@
                                                 <div class="setting__menu">
 
                                                     <span><a href="/user/profile/">My Account</a></span>
-                                                    <span><a href="../static/#">My Comments</a></span>
+                                                    <span><a href="/user/photos">My Photos</a></span>
+                                                    <span><a href="/user/comments">My Comments</a></span>
                                                     <span><a href="/logout/">Logout</a></span>
                                                 </div>
                                             </div>
@@ -225,7 +227,7 @@
                                 {% else %}
 
                                     <div class="switcher-currency">
-                                        <strong class="label switcher-label">
+                                        <strong class="label">
                                             <span>log In OR Create Account</span>
                                         </strong>
                                         <div class="switcher-options">

@@ -1,23 +1,23 @@
 {% extends 'HomeBase.html' %}
-{% block title %}Comments{% endblock %}
-{% block keywords %}{{ setting.keywords }}{% endblock %}
-{% block description %}{{ setting.description }}{% endblock %}
-{% block icon %}{{ setting.icon }}{% endblock %}
+{% block title %}My Comments{% endblock %}
+{% block keywords %}My Comments{% endblock %}
+{% block description %}My Comments{% endblock %}
+{% block icon %}{{ setting.icon.url }}{% endblock %}
 
 {% block body %}
 
 
     <!-- Start Bradcaump area -->
-    <div class="ht__bradcaump__area bg-image--6">
+    <div class="ht__bradcaump__area bg-image--5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">User Profile</h2>
+                        <h2 class="bradcaump-title">My Comments</h2>
                         <nav class="bradcaump-content">
                             <a class="breadcrumb_item" href="/">Home</a>
                             <span class="brd-separetor">/</span>
-                            <span class="breadcrumb_item active">User Profile</span>
+                            <span class="breadcrumb_item active">My Comments</span>
                         </nav>
                     </div>
                 </div>
@@ -71,10 +71,6 @@
                                 <th>
                                     Comment
                                 </th>
-
-                                <th>
-                                    Status
-                                </th>
                                 <th>
                                     Action
                                 </th>
@@ -98,10 +94,6 @@
 
                                     <td>
                                         {{ com.comment }}
-                                    </td>
-
-                                    <td>
-                                        {{ com.status }}
                                     </td>
                                     <td>
                                             <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">

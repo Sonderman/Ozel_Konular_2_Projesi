@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home | {% block title %} SharePhoto {% endblock %}</title>
+    <title>{% block title %} SharePhoto {% endblock %}</title>
     <meta name="keywords" content="{% block keywords %}Anasayfa anahtar kelimeler{% endblock %}">
     <meta name="description" content="{% block description %}Anasayfa kısa  açıklama{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,7 +38,6 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -47,6 +46,7 @@
     <!-- Main wrapper -->
     <div class="wrapper" id="wrapper">
         {% include 'searchPopUp.html' %}
+    <div style="padding-top: 200px"></div>
 
         {% block body %}
 
@@ -59,7 +59,9 @@
         {% include 'footer.html' %}
     </div>
     <!-- //Main wrapper -->
+
 {% endblock %}
+
 {% include 'jsFiles.html' %}
 
 </body>

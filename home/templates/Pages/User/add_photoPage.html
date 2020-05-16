@@ -1,8 +1,8 @@
 {% extends 'HomeBase.html' %}
-{% block title %}{{ setting.title }}{% endblock %}
-{% block keywords %}{{ setting.keywords }}{% endblock %}
-{% block description %}{{ setting.description }}{% endblock %}
-{% block icon %}{{ setting.icon }}{% endblock %}
+{% block title %}My Profile{% endblock %}
+{% block keywords %}Add Or Update Photo{% endblock %}
+{% block description %}Add Or Update Photo{% endblock %}
+{% block icon %}{{ setting.icon.url }}{% endblock %}
 {% block head %}
 {% load static %}
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -15,16 +15,18 @@
 
 
     <!-- Start Bradcaump area -->
-    <div class="ht__bradcaump__area bg-image--6">
+    <div class="ht__bradcaump__area bg-image--5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">User Profile</h2>
+                        <h2 class="bradcaump-title">Add Or Update Photo</h2>
                         <nav class="bradcaump-content">
                             <a class="breadcrumb_item" href="/">Home</a>
                             <span class="brd-separetor">/</span>
-                            <span class="breadcrumb_item active">User Profile</span>
+                            <a class="breadcrumb_item" href="/user/photos">My Photos</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb_item active">Add Or Update Photo</span>
                         </nav>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
                                 {{ form.as_p }}
                             </fieldset>
                             <div class="form-group">
-                                <input type="submit" value="Add">
+                                <input class="btn btn-primary" type="submit" value="Save">
                             </div>
                         </form>
                     </div>

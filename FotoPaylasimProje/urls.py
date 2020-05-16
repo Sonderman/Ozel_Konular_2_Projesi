@@ -34,7 +34,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup_view, name='signup'),
     path('category/<int:id>/<slug:slug>/', views.category_view, name='category_view'),
-    path('menu/<int:id>', views.menu, name='menu'),
+    path('menu/<int:id>/', views.menu, name='menu'),
     path('error/', views.error, name='error'),
 ]
 if settings.DEBUG:

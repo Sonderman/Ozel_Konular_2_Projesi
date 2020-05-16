@@ -1,9 +1,11 @@
+from collections import Counter
+
 from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
-
 from content.models import Menu, Content
+from globals import *
 from photo.models import *
 from .forms import SearchForm, SignUpForm
 from .models import *
@@ -14,20 +16,19 @@ def index(request):
     # data = Photo.objects.all().order_by('-id')[4]
     # data = Photo.objects.all().order_by('?')[:4]
     # photo = Photo.objects.filter(category_id=id)
-    setting = Setting.objects.get(pk=1)
     sliderdata = Photo.objects.all()[:4]
-    category = Category.objects.all()
     menu = Menu.objects.all()
     # lastphotos = Content.objects.filter(type='photo').order_by('-id')[:4]
     photos = Photo.objects.filter(status='True')[:10]
-    context = {'setting': setting, 'sliderdata': sliderdata, 'category': category, 'photos': photos, 'menu': menu}
+    context = {'sliderdata': sliderdata, 'photos': photos, 'menu': menu}
+    context.update(common())
     return render(request, 'index.html', context)
 
 
 def category_view(request, id, slug):
-    category = Category.objects.all()
     photos = Photo.objects.filter(category_id=id)
-    context = {'category': category, 'photos': photos, 'page': 'category_view'}
+    context = {'photos': photos, 'page': 'category_view'}
+    context.update(common())
     return render(request, 'Pages/categoryGallery.html', context)
 
 
@@ -44,34 +45,26 @@ def contact(request):
             data.save()
             messages.success(request, "Your message has been succesfully sent, Thank you")
             return HttpResponseRedirect('/contact')
-    setting = Setting.objects.get(pk=1)
-    category = Category.objects.all()
     form = ContactForm()
-    context = {'category': category, 'setting': setting, 'form': form}
+    context = {'form': form}
+    context.update(common())
     return render(request, 'Pages/contactPage.html', context)
 
 
 def aboutus(request):
-    category = Category.objects.all()
-    setting = Setting.objects.get(pk=1)
-    context = {'category': category, 'setting': setting}
-    return render(request, 'Pages/aboutUsPage.html', context)
+    return render(request, 'Pages/aboutUsPage.html', common())
 
 
 def references(request):
-    category = Category.objects.all()
-    setting = Setting.objects.get(pk=1)
-    context = {'category': category, 'setting': setting}
-    return render(request, 'Pages/referencesPage.html', context)
+    return render(request, 'Pages/referencesPage.html', common())
 
 
 def photo_detail(request, id, slug):
-    category = Category.objects.all()
-    setting = Setting.objects.get(pk=1)
     photo = Photo.objects.get(pk=id)
     images = Images.objects.filter(photo=id)
     comments = Comment.objects.filter(photo_id=id, status='True')
-    context = {'setting': setting, 'photo': photo, 'imgofphoto': images, 'comments': comments, 'category': category}
+    context = {'photo': photo, 'imgofphoto': images, 'comments': comments}
+    context.update(common())
     # return HttpResponse(category)
     return render(request, 'Pages/photoDetail.html', context)
 
@@ -80,14 +73,14 @@ def photo_search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
-            category = Category.objects.all()
             query = form.cleaned_data['query']
             catid = form.cleaned_data['catid']
             if catid == 0:
                 photos = Photo.objects.filter(title__icontains=query)
             else:
                 photos = Photo.objects.filter(title__icontains=query, category_id=catid)
-            context = {'photos': photos, 'category': category, }
+            context = {'photos': photos}
+            context.update(common())
             return render(request, 'Pages/photo_search.html', context)
     return HttpResponseRedirect('/')
 
@@ -115,7 +108,6 @@ def logout_view(request):
 
 
 def login_view(request):
-    category = Category.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -126,11 +118,10 @@ def login_view(request):
         else:
             messages.warning(request, "Login Failed!!")
             return HttpResponseRedirect('/login')
-    return render(request, 'Pages/login.html', {'category': category})
+    return render(request, 'Pages/login.html', common())
 
 
 def signup_view(request):
-    category = Category.objects.all()
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         print("SignUp girdi")
@@ -151,7 +142,8 @@ def signup_view(request):
         else:
             messages.warning(request, "SignUp Failed!!<br>" + str(form.errors))
     form = SignUpForm()
-    context = {'form': form, 'category': category}
+    context = {'form': form}
+    context.update(common())
     return render(request, 'Pages/signup.html', context)
 
 
@@ -171,11 +163,11 @@ def menu(request, id):
 
 
 def error(request):
-    return render(request, 'Pages/error_page.html')
+    return render(request, 'Pages/error_page.html', common())
 
 
 def faq(request):
-    category = Category.objects.all()
-    faq = FAQ.objects.all().order_by('ordernumber')
-    context = {'category': category, 'faq': faq}
+    fq = FAQ.objects.all().order_by('ordernumber')
+    context = {'faq': fq}
+    context.update(common())
     return render(request, 'Pages/faqPage.html', context)

@@ -116,9 +116,6 @@ class ImagesForm(ModelForm):
         fields = ['title', 'image']
 
 
-
-
-
 class Comment(models.Model):
     STATUS = (
         ('New', 'Yeni'),

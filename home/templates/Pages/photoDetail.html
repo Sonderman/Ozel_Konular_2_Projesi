@@ -1,7 +1,7 @@
 {% extends 'HomeBase.html' %}
-{% block title %}{{ setting.title }}{% endblock %}
-{% block keywords %}{{ setting.keywords }}{% endblock %}
-{% block description %}{{ setting.description }}{% endblock %}
+{% block title %}{{ photo.title }}{% endblock %}
+{% block keywords %}{{ photo.keywords }}{% endblock %}
+{% block description %}{{ photo.description }}{% endblock %}
 {% block icon %}{{ setting.icon.url }}{% endblock %}
 
 {% block body %}
@@ -26,7 +26,7 @@
                         <div class="pro_details_nav nav justify-content-start" role="tablist">
                             <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details"
                                role="tab">Details</a>
-                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">COMMENTS</a>
                         </div>
                         <div class="tab__container">
                             <!-- Start Single Tab Content -->
@@ -38,7 +38,7 @@
                             <div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
                                 <div class="blog-details content">
                                     <div class="comments_area">
-                                        <h3 class="comment__title">1 comment</h3>
+                                        <h3 class="comment__title">Comments</h3>
                                         <ul class="comment__list">
                                             {% for com in comments %}
                                                 <li>
@@ -49,12 +49,13 @@
                                                         <div class="content">
 
                                                             <div class="comnt__author d-block d-sm-flex">
-                                                                <span><a href="#">{{ com.user.first_name }}</a> Post author</span>
-                                                                <span>{{ com.created_at }}</span>
-                                                                <div class="reply__btn">
-                                                                    <a href="#">Reply</a>
-                                                                </div>
+                                                                <span>Post author: <a href="#">{{ com.user.first_name }}</a> </span>
+                                                                <span>{{ com.create_at }}</span>
+
                                                             </div>
+                                                            <label>Subject: </label>
+                                                            {{ com.subject }}<br>
+                                                            <label>Commented:</label>
                                                             <p>{{ com.comment }}</p>
 
 
@@ -161,7 +162,8 @@
                                                 {% if user.id is not  None %}
                                                     <button>Submit Review</button>
                                                 {% else %}
-                                                    Yorum Eklemek için Üye olun!
+                                                    To make comment , please login or signup
+                                                    <a href="/login" class="btn btn-success" >Login</a>
                                                 {% endif %}
                                             </div>
                                         </div>

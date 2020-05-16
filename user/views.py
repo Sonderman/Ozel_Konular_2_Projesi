@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
 from content.models import Menu
+from globals import common
 from home.models import UserProfile, UserProfileForm, Setting
 from photo.models import Category, Comment, Photo, PhotoForm
 from user.forms import UserUpdateForm, ProfileUpdateForm
@@ -13,10 +14,9 @@ from user.forms import UserUpdateForm, ProfileUpdateForm
 
 def index(request):
     current_user = request.user
-    category = Category.objects.all()
-    setting = Setting.objects.get(pk=1)
     profile = UserProfile.objects.get(user_id=current_user.id)
-    context = {'category': category, 'setting': setting, 'profile': profile}
+    context = {'profile': profile}
+    context.update(common())
     return render(request, 'Pages/User/profile_main.html', context)
 
 
@@ -30,14 +30,14 @@ def profile_update(request):
             messages.success(request, "Your account has been succesfully updated.")
             return redirect('/user/profile')
     else:
-        category = Category.objects.all()
+
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.userprofile)
         context = {
-            'category': category,
             'user_form': user_form,
             'profile_form': profile_form
         }
+        context.update(common())
         return render(request, 'Pages/User/update_profile.html', context)
 
 
@@ -53,24 +53,22 @@ def change_password(request):
             messages.warning(request, "Error!!.<br>" + str(form.errors))
             return redirect('change_password')
     else:
-        category = Category.objects.all()
         form = PasswordChangeForm(request.user)
         context = {
-            'category': category,
             'form': form,
         }
+        context.update(common())
         return render(request, 'Pages/User/change_password.html', context)
 
 
 @login_required(login_url='/login')
 def comments(request):
-    category = Category.objects.all()
     current_user = request.user
     comment = Comment.objects.filter(user_id=current_user.id)
     context = {
-        'category': category,
         'comments': comment,
     }
+    context.update(common())
     return render(request, 'Pages/User/commentsPage.html', context)
 
 
@@ -105,24 +103,22 @@ def addphoto(request):
             messages.warning(request, "Error:" + str(form.errors))
             return HttpResponseRedirect("/user/addphoto")
     else:
-        category = Category.objects.all()
         form = PhotoForm()
         context = {
-            'category': category,
             'form': form,
         }
+        context.update(common())
         return render(request, 'Pages/User/add_photoPage.html', context)
 
 
 @login_required(login_url='/login')
 def photos(request):
-    category = Category.objects.all()
     menu = Menu.objects.all()
     photo = Photo.objects.filter(user_id=request.user.id, status='True')
     context = {
-        'category': category,
         'photos': photo,
     }
+    context.update(common())
     return render(request, 'Pages/User/photosPage.html', context)
 
 
@@ -141,12 +137,11 @@ def photoedit(request, id):
             messages.warning(request, "Error:" + str(form.errors))
             return HttpResponseRedirect("/user/photoedit/" + str(id))
     else:
-        category = Category.objects.all()
         form = PhotoForm(instance=photo)
         context = {
-            'category': category,
             'form': form,
         }
+        context.update(common())
         return render(request, 'Pages/User/add_photoPage.html', context)
 
 

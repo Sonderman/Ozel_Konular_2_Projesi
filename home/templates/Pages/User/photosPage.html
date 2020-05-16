@@ -1,23 +1,23 @@
 {% extends 'HomeBase.html' %}
-{% block title %}Comments{% endblock %}
-{% block keywords %}{{ setting.keywords }}{% endblock %}
-{% block description %}{{ setting.description }}{% endblock %}
-{% block icon %}{{ setting.icon }}{% endblock %}
+{% block title %}My Photos{% endblock %}
+{% block keywords %}My Photos{% endblock %}
+{% block description %}My Photos{% endblock %}
+{% block icon %}{{ setting.icon.url }}{% endblock %}
 
 {% block body %}
 
-
+{% load static %}
     <!-- Start Bradcaump area -->
-    <div class="ht__bradcaump__area bg-image--6">
+    <div class="ht__bradcaump__area bg-image--5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">User Profile</h2>
+                        <h2 class="bradcaump-title">My Photos</h2>
                         <nav class="bradcaump-content">
                             <a class="breadcrumb_item" href="/">Home</a>
                             <span class="brd-separetor">/</span>
-                            <span class="breadcrumb_item active">User Profile</span>
+                            <span class="breadcrumb_item active">My Photos</span>
                         </nav>
                     </div>
                 </div>
@@ -53,7 +53,6 @@
                             {% endfor %}
                         {% endif %}
 
-                        <a href="/user/addphoto" class="btn-primary">Add Photo</a>
                         <table>
 
                             <tr>
@@ -67,29 +66,25 @@
                                 <th>
                                     Title
                                 </th>
-
                                 <th>
-                                    Subject
+                                    Category
                                 </th>
-
                                 <th>
-                                    Comment
+                                    Created At
                                 </th>
-
                                 <th>
-                                    Status
+                                    Updated At
                                 </th>
                                 <th>
                                     Action
                                 </th>
                             </tr>
 
-
                             {% for ph in photos %}
                                 <tr>
                                      <td>
                                         <a href="javascript:window.open('/photo/gallery/{{ ph.id }}','','toolbar=no,location=no,directories=0,status=no,top=50,left=100,menuBar=no,scrollBars=yes,resizeable=no,width=900,height=600');">
-                                            <img src="{{ ph.image.url }}" height="40" title="Image Gallery"></a>
+                                            <img src="{% static  'images/bg/galleryIcon.png' %}" height="50" title="Image Gallery"></a>
                                     </td>
                                     <td>
                                         <img height="50" src="{{ ph.image.url }}">
@@ -99,28 +94,25 @@
                                         <a href="/photo/{{ ph.id }}/{{ ph.slug }}">
                                             <strong>{{ ph.title }}</strong></a>
                                     </td>
-
                                     <td>
-                                        {{ ph.subject }}
-                                    </td>
-
-                                    <td>
-                                        {{ ph.comment }}
-                                    </td>
-
-                                    <td>
-                                        {{ ph.status }}
+                                        {{ ph.category.title }}
                                     </td>
                                     <td>
-                                        <a class="btn-success" href="/user/photoedit/{{ ph.id }}"
+                                        {{ ph.create_at }}
+                                    </td>
+                                    <td>
+                                        {{ ph.update_at }}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success" href="/user/photoedit/{{ ph.id }}"
                                         >EDIT</a>
-                                        <a class="btn-danger" href="/user/photodelete/{{ ph.id }}"
+                                        <a class="btn btn-danger" href="/user/photodelete/{{ ph.id }}"
                                            onclick="return confirm('Will be Deleted! Are you Sure?')">DELETE</a>
                                     </td>
                                 </tr>
                             {% endfor %}
                         </table>
-
+                    <a class="btn btn-primary" href="/user/addphoto" >Add Photo</a>
 
                     </div>
 
