@@ -61,11 +61,13 @@ def references(request):
 
 def photo_detail(request, id, slug):
     photo = Photo.objects.get(pk=id, status='True')
+    profil = UserProfile.objects.get(user_id=photo.user_id)
     recentP = Photo.objects.filter(status='True').order_by('-id')[:5]
     recentCom = Comment.objects.filter(status='True').order_by('-id')[:5]
     images = Images.objects.filter(photo=id)
     comments = Comment.objects.filter(photo_id=id, status='True')
-    context = {'photo': photo, 'imgofphoto': images, 'comments': comments, 'recentP': recentP, 'recentCom': recentCom}
+    context = {'photo': photo, 'imgofphoto': images, 'comments': comments, 'recentP': recentP, 'recentCom': recentCom,
+               'profil': profil}
     context.update(common())
     return render(request, 'Pages/photoDetail.html', context)
 

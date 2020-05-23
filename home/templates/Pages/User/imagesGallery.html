@@ -3,12 +3,19 @@
 {% block clean %}
     <div class="col">
 
-        <div class="fotorama" data-nav="thumbs" data-width="600">
-            {% for  rs in images %}
-                <img src="{{ rs.image.url }}" alt="{{ rs.title }}">
-            {% endfor %}
-        </div>
 
+        <div class="row">
+
+            <div class="col"></div>
+            <div class="col">
+                <div class="fotorama col" data-nav="thumbs" data-width="600">
+                    {% for  rs in images %}
+                        <img src="{{ rs.image.url }}" alt="{{ rs.title }}">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
         <table style="width:100%; margin-bottom: 30px">
             <tr>
                 <th style="background-color: whitesmoke">Title</th>
@@ -30,15 +37,19 @@
         </table>
 
         <div class="row">
-            <form action="/photo/galleryadd/{{ id }}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    {{ form.as_p }}
-                </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-primary" type="submit">Add Image</button>
-                </div>
-            </form>
+            <div class="col"></div>
+            <div class="col">
+                <form action="/photo/galleryadd/{{ id }}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        {{ form.as_p }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Add Image</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col"></div>
         </div>
     </div>
 {% endblock %}

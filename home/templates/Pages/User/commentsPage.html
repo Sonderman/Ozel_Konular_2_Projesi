@@ -57,6 +57,9 @@
 
                             <tr>
                                 <th>
+                                    Image
+                                </th>
+                                <th>
                                     Photo
                                 </th>
 
@@ -79,7 +82,13 @@
 
                             {% for com in comments %}
                                 <tr>
+                                <td>
+                                    <a href="/photo/{{ com.photo_id }}/{{ com.photo.slug }}">
+                                    <img  height="50" src="{{ com.photo.image.url }}">
+                                    </a>
+                                </td>
                                     <td>
+
                                         <a href="/photo/{{ com.photo_id }}/{{ com.photo.slug }}">
                                             <strong>{{ com.photo.title }}</strong></a>
                                     </td>

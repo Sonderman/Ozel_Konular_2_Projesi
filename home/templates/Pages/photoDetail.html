@@ -64,11 +64,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-12">
+                    <div class="col">
+                        <div class="row">
+                        <img height="100" src="{{ profil.image.url }}">
+                            <div class="col">
+                                <ul>
+                                <li>{{ photo.user.username }}</li>
+                                <li> Poster At: {{ photo.create_at }}</li>
+                                </ul>
+                            </div>
+                    </div>
+                    </div>
                     <div class="wn__single__product">
                         <br>
                         <br>
                         <br>
-                        <br>
+
+
                         {% include "Components/slideofphoto.html" %}
                     </div>
                     <br>
@@ -120,7 +132,7 @@
                                                                     <div class="review-ratings">
 
                                                                         <div class="rating-summary d-flex">
-                                                                        <span>Rate:</span>
+                                                                            <span>Rate:</span>
 
                                                                             <ul class="rating d-flex">
 
