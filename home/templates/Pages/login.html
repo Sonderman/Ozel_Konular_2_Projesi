@@ -47,26 +47,28 @@
 
     <section class="my_account_area pt--80 pb--55 bg--white">
         <div class="container">
-            <div class="text-center">
-                <div class="col-lg-6 col-12">
+
+            <div class="col">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="my__account__wrapper">
+                <div class="text-center">
+                    <h3 class="account__title">Login Form</h3></div>
+
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}" role="alert">
-                                {{ message }}
+                            <div style="color:#d43f3a;font-size: medium">
+                                {{ message|safe }}
                             </div>
                         {% endfor %}
                     {% endif %}
-                    <div class="my__account__wrapper">
-                        <h3 class="account__title">Login Form</h3>
 
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div style="color:#d43f3a;font-size: medium">
-                                    {{ message|safe }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-
+                    <div class="col">
                         <form action="" method="post">
                             {% csrf_token %}
                             <div class="account__form">
@@ -90,10 +92,12 @@
                             </div>
                         </form>
                     </div>
-                </div>
 
+                </div>
             </div>
+
         </div>
+
     </section>
 
 {% endblock %}

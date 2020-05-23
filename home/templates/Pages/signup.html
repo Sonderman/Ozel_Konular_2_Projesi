@@ -27,7 +27,7 @@
         <div class="container">
 
 
-            <div class="col-lg-6 col-12">
+            <div class="col">
                 {% if messages %}
                     {% for message in messages %}
                         <div class="alert alert-{{ message.tags }}" role="alert">
@@ -36,7 +36,10 @@
                     {% endfor %}
                 {% endif %}
                 <div class="my__account__wrapper">
+                <div class="text-center">
                     <h3 class="account__title">Register Form</h3>
+                </div>
+
 
 
                     <!--<form method="post">
