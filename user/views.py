@@ -64,7 +64,7 @@ def change_password(request):
 @login_required(login_url='/login')
 def comments(request):
     current_user = request.user
-    comment = Comment.objects.filter(user_id=current_user.id)
+    comment = Comment.objects.filter(user_id=current_user.id, status='True')
     context = {
         'comments': comment,
     }
@@ -113,7 +113,7 @@ def addphoto(request):
 
 @login_required(login_url='/login')
 def photos(request):
-    menu = Menu.objects.all()
+    # menu = Menu.objects.all()
     photo = Photo.objects.filter(user_id=request.user.id, status='True')
     context = {
         'photos': photo,

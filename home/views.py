@@ -16,17 +16,17 @@ def index(request):
     # data = Photo.objects.all().order_by('-id')[4]
     # data = Photo.objects.all().order_by('?')[:4]
     # photo = Photo.objects.filter(category_id=id)
-    sliderdata = Photo.objects.all()[:4]
-    menu = Menu.objects.all()
+    sliderdata = Photo.objects.filter(status='True').order_by('?')[:5]
+    # menu = Menu.objects.all()
     # lastphotos = Content.objects.filter(type='photo').order_by('-id')[:4]
-    photos = Photo.objects.filter(status='True')[:10]
+    photos = Photo.objects.filter(status='True')[:20]
     context = {'sliderdata': sliderdata, 'photos': photos, 'menu': menu}
     context.update(common())
     return render(request, 'index.html', context)
 
 
 def category_view(request, id, slug):
-    photos = Photo.objects.filter(category_id=id)
+    photos = Photo.objects.filter(category_id=id, status='True')
     context = {'photos': photos, 'page': 'category_view'}
     context.update(common())
     return render(request, 'Pages/categoryGallery.html', context)
@@ -60,12 +60,13 @@ def references(request):
 
 
 def photo_detail(request, id, slug):
-    photo = Photo.objects.get(pk=id)
+    photo = Photo.objects.get(pk=id, status='True')
+    recentP = Photo.objects.filter(status='True').order_by('-id')[:5]
+    recentCom = Comment.objects.filter(status='True').order_by('-id')[:5]
     images = Images.objects.filter(photo=id)
     comments = Comment.objects.filter(photo_id=id, status='True')
-    context = {'photo': photo, 'imgofphoto': images, 'comments': comments}
+    context = {'photo': photo, 'imgofphoto': images, 'comments': comments, 'recentP': recentP, 'recentCom': recentCom}
     context.update(common())
-    # return HttpResponse(category)
     return render(request, 'Pages/photoDetail.html', context)
 
 
@@ -76,9 +77,9 @@ def photo_search(request):
             query = form.cleaned_data['query']
             catid = form.cleaned_data['catid']
             if catid == 0:
-                photos = Photo.objects.filter(title__icontains=query)
+                photos = Photo.objects.filter(title__icontains=query, status='True')
             else:
-                photos = Photo.objects.filter(title__icontains=query, category_id=catid)
+                photos = Photo.objects.filter(title__icontains=query, category_id=catid, status='True')
             context = {'photos': photos}
             context.update(common())
             return render(request, 'Pages/photo_search.html', context)
@@ -89,7 +90,7 @@ def search_auto(request):
     print("çalıştı")
     if request.is_ajax():
         q = request.GET.get('term', '')
-        photo = Photo.objects.filter(title__icontains=q)
+        photo = Photo.objects.filter(title__icontains=q, status='True')
         results = []
         for ph in photo:
             photo_json = {}
@@ -135,7 +136,7 @@ def signup_view(request):
             user_profile = UserProfile()
             user_profile.user = user
             user_profile.phone = 0
-            user_profile.image = "assets/images/logo.png"
+            user_profile.image = "assets/User.jpg"
             user_profile.save()
             login(request, user)
             return HttpResponseRedirect('/')
@@ -148,8 +149,8 @@ def signup_view(request):
 
 
 def randphoto(request):
-    randphotoid = Photo.objects.order_by('?')[:1]
-    return HttpResponseRedirect('/photo/' + str(randphotoid[0].id) + '/' + str(randphotoid[0].slug))
+    randphotoid = Photo.objects.filter(status='True').order_by('?')[0]
+    return HttpResponseRedirect('/photo/' + str(randphotoid.id) + '/' + str(randphotoid.slug))
 
 
 def menu(request, id):
@@ -167,7 +168,7 @@ def error(request):
 
 
 def faq(request):
-    fq = FAQ.objects.all().order_by('ordernumber')
+    fq = FAQ.objects.filter(status='True').order_by('ordernumber')
     context = {'faq': fq}
     context.update(common())
     return render(request, 'Pages/faqPage.html', context)

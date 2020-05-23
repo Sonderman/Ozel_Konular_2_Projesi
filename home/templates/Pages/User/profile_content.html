@@ -3,6 +3,13 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 ol-lg-12">
                 <div class="table-content wnro__table table-responsive">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div style="color:#d43f3a;font-size: medium">
+                                {{ message|safe }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                     <table>
                         <thead>
                         <tr class="title-top">

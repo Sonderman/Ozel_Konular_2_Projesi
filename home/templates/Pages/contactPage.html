@@ -1,5 +1,5 @@
 {% extends 'HomeBase.html' %}
-{% block title %}{{ setting.title }}{% endblock %}
+{% block title %}Contact{% endblock %}
 {% block keywords %}{{ setting.keywords }}{% endblock %}
 {% block description %}{{ setting.description }}{% endblock %}
 {% block icon %}{{ setting.icon.url }}{% endblock %}
@@ -78,10 +78,12 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-12 md-mt-40 sm-mt-40">
                     <div class="wn__address">
                         <h2 class="contact__title">INFO</h2>
                         <p>{{ setting.contact|safe }} </p>
+                        <!--
                         <div class="wn__addres__wreapper">
 
                             <div class="single__address">
@@ -108,8 +110,10 @@
                                 </div>
                             </div>
                         </div>
+                        -->
                     </div>
                 </div>
+
             </div>
         </div>
     </section>

@@ -6,6 +6,60 @@
 
 {% block body %}
 
+
+
+
+    <style>
+        .txt-center {
+            text-align: center;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .clear {
+            float: none;
+            clear: both;
+        }
+
+        .rating {
+            width: 90px;
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            text-align: center;
+            position: relative;
+            left: 30px;
+        }
+
+        .rating > label {
+            float: right;
+            display: inline;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            width: 1.1em;
+            cursor: pointer;
+            color: #000;
+        }
+
+        .rating > label:hover,
+        .rating > label:hover ~ label,
+        .rating > input.radio-btn:checked ~ label {
+            color: transparent;
+        }
+
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before,
+        .rating > input.radio-btn:checked ~ label:before,
+        .rating > input.radio-btn:checked ~ label:before {
+            content: "\2605";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+        }
+    </style>
+
     <div class="maincontent bg--white pt--80 pb--55">
         <div class="container">
             <div class="row">
@@ -49,7 +103,8 @@
                                                         <div class="content">
 
                                                             <div class="comnt__author d-block d-sm-flex">
-                                                                <span>Post author: <a href="#">{{ com.user.first_name }}</a> </span>
+                                                                <span>Post author: <a
+                                                                        href="#">{{ com.user.first_name }}</a> </span>
                                                                 <span>{{ com.create_at }}</span>
 
                                                             </div>
@@ -63,25 +118,31 @@
 
                                                                 <div class="review__ratings__type d-flex">
                                                                     <div class="review-ratings">
+
                                                                         <div class="rating-summary d-flex">
-                                                                            <span>Rate</span>
+                                                                        <span>Rate:</span>
+
                                                                             <ul class="rating d-flex">
-                                                                                <li {% if com.rate < 1 %}
-                                                                                    class="off" {% endif %}><i
-                                                                                        class="zmdi zmdi-star"></i></li>
-                                                                                <li {% if com.rate < 2 %}
-                                                                                    class="off" {% endif %}><i
-                                                                                        class="zmdi zmdi-star"></i></li>
-                                                                                <li {% if com.rate < 3 %}
+
+
+                                                                                <li {% if com.rate < 5 %}
                                                                                     class="off" {% endif %}><i
                                                                                         class="zmdi zmdi-star"></i></li>
                                                                                 <li {% if com.rate < 4 %}
                                                                                     class="off" {% endif %}><i
                                                                                         class="zmdi zmdi-star"></i></li>
-                                                                                <li {% if com.rate < 5 %}
+                                                                                <li {% if com.rate < 3 %}
+                                                                                    class="off" {% endif %}><i
+                                                                                        class="zmdi zmdi-star"></i></li>
+                                                                                <li {% if com.rate < 2 %}
+                                                                                    class="off" {% endif %}><i
+                                                                                        class="zmdi zmdi-star"></i></li>
+
+                                                                                <li {% if com.rate < 1 %}
                                                                                     class="off" {% endif %}><i
                                                                                         class="zmdi zmdi-star"></i></li>
                                                                             </ul>
+
                                                                         </div>
 
 
@@ -146,24 +207,46 @@
                                                 <strong class="text-uppercase">
                                                     Your Rating:
                                                 </strong>
+                                                <!--
                                                 <input id="star1" type="radio" name="rate" value="1"/><label
-                                                    for="star1"></label>
+                                                    for="star1">&#9733;</label>
                                                 <input id="star2" type="radio" name="rate" value="2"/><label
-                                                    for="star2"></label>
+                                                    for="star2">2</label>
                                                 <input id="star3" type="radio" name="rate" value="3"/><label
-                                                    for="star3"></label>
+                                                    for="star3">3</label>
                                                 <input id="star4" type="radio" name="rate" value="4"/><label
-                                                    for="star4"></label>
+                                                    for="star4">4</label>
                                                 <input id="star5" type="radio" name="rate" value="5"/><label
-                                                    for="star5"></label>
+                                                    for="star5">5</label>
+                                                    -->
+
+                                                <div class="rating">
+
+                                                    <input id="star5" name="rate" type="radio" value="5"
+                                                           class="radio-btn hide"/>
+                                                    <label for="star5">☆</label>
+                                                    <input id="star4" name="rate" type="radio" value="4"
+                                                           class="radio-btn hide"/>
+                                                    <label for="star4">☆</label>
+                                                    <input id="star3" name="rate" type="radio" value="3"
+                                                           class="radio-btn hide"/>
+                                                    <label for="star3">☆</label>
+                                                    <input id="star2" name="rate" type="radio" value="2"
+                                                           class="radio-btn hide"/>
+                                                    <label for="star2">☆</label>
+                                                    <input id="star1" name="rate" type="radio" value="1"
+                                                           class="radio-btn hide"/>
+                                                    <label for="star1">☆</label>
+                                                    <div class="clear"></div>
+                                                </div>
 
                                             </div>
                                             <div class="review-form-actions">
                                                 {% if user.id is not  None %}
-                                                    <button>Submit Review</button>
+                                                    <input type="submit" class="btn btn-success" value="Send Comment">
                                                 {% else %}
                                                     To make comment , please login or signup
-                                                    <a href="/login" class="btn btn-success" >Login</a>
+                                                    <a href="/login" class="btn btn-success">Login</a>
                                                 {% endif %}
                                             </div>
                                         </div>
@@ -232,104 +315,40 @@
                         </aside>
                         <!-- End Single Widget -->
 
-                        <!-- Start Single Widget -->
-                        <aside class="widget category_widget">
-                            <h3 class="widget-title">Categories</h3>
-                            <ul>
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Electronics</a></li>
-                                <li><a href="#">Kids</a></li>
-                                <li><a href="#">Flower</a></li>
-                                <li><a href="#">Books</a></li>
-                                <li><a href="#">Jewelle</a></li>
-                            </ul>
-                        </aside>
-                        <!-- End Single Widget -->
 
                         <aside class="wedget__categories poroduct--tag">
-                            <h3 class="wedget__title">Product Tags</h3>
+                            <h3 class="wedget__title">Categories</h3>
                             <ul>
-                                <li><a href="#">Biography</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Cookbooks</a></li>
-                                <li><a href="#">Health & Fitness</a></li>
-                                <li><a href="#">History</a></li>
-                                <li><a href="#">Mystery</a></li>
-                                <li><a href="#">Inspiration</a></li>
-                                <li><a href="#">Religion</a></li>
-                                <li><a href="#">Fiction</a></li>
-                                <li><a href="#">Fantasy</a></li>
-                                <li><a href="#">Music</a></li>
-                                <li><a href="#">Toys</a></li>
-                                <li><a href="#">Hoodies</a></li>
+                                {% recursetree category %}
+                                    {% if  node.is_leaf_node %}
+                                        <li><a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a></li>
+                                    {% endif %}
+                                    {{ children }}
+                                {% endrecursetree %}
                             </ul>
                         </aside>
 
                         <!-- Start Single Widget -->
                         <aside class="widget recent_widget">
-                            <h3 class="widget-title">Recent</h3>
+                            <h3 class="widget-title">Recent Photos</h3>
                             <div class="recent-posts">
                                 <ul>
                                     <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img src="images/blog/sm-img/1.jpg"
-                                                                                 alt="blog images"></a>
+                                        {% for ph in recentP %}
+                                            <div class="post-wrapper d-flex">
+                                                <div class="thumb">
+                                                    <a href="/photo/{{ ph.id }}/{{ ph.slug }}"><img
+                                                            src="{{ ph.image.url }}"
+                                                            alt="{{ ph.description }}"></a>
+                                                </div>
+                                                <div class="content">
+                                                    <h4><a href="/photo/{{ ph.id }}/{{ ph.slug }}">{{ ph.title }}</a>
+                                                    </h4>
+                                                    <p> {{ ph.create_at }}</p>
+                                                </div>
                                             </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Blog image post</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img src="images/blog/sm-img/2.jpg"
-                                                                                 alt="blog images"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Post with Gallery</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img src="images/blog/sm-img/3.jpg"
-                                                                                 alt="blog images"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Post with Video</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img src="images/blog/sm-img/4.jpg"
-                                                                                 alt="blog images"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Maecenas ultricies</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img src="images/blog/sm-img/5.jpg"
-                                                                                 alt="blog images"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Blog image post</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
+                                            <hr>
+                                        {% endfor %}
                                     </li>
                                 </ul>
                             </div>
@@ -337,17 +356,17 @@
                         <!-- End Single Widget -->
                         <!-- Start Single Widget -->
                         <aside class="widget comment_widget">
-                            <h3 class="widget-title">Comments</h3>
+                            <h3 class="widget-title"> Recent Comments</h3>
                             <ul>
-                                {% for com in comments %}
+                                {% for com in recentCom %}
                                     <li>
                                         <div class="post-wrapper">
                                             <div class="thumb">
-                                                <img src="images/blog/comment/1.jpeg" alt="Comment images">
+                                                <img src="{{ com.userprofil.image.url }}" alt="Comment image">
                                             </div>
                                             <div class="content">
                                                 <p>{{ com.user.first_name }} says:</p>
-                                                <a href="#">{{ com.comment }}</a>
+                                                <a href="/photo/{{ com.photo.id }}/{{ com.photo.slug }}">{{ com.comment }}</a>
                                             </div>
                                         </div>
                                     </li>
@@ -355,17 +374,9 @@
                             </ul>
                         </aside>
                         <!-- End Single Widget -->
-
-
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
-
-
-
-
 {% endblock %}

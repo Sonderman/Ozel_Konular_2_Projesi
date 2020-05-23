@@ -1,7 +1,7 @@
 {% load static %}
 
 
-<div class="fotorama" data-nav="thumbs">
+<div class="fotorama" data-width="90%" data-nav="thumbs">
     <a href="{{ photo.id }}.jpg"><img src="{{ photo.image.url }}" alt=""></a>
     {% for img in imgofphoto %}
         <a href="{{ img.id }}.jpg"><img src="{{ img.image.url }}" alt=""></a>

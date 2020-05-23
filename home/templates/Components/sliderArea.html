@@ -10,10 +10,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="slider__content">
+                        <div class="slider__content" >
                             <div class="contentbox">
-                                <h2>{{ resim.title }}</h2>
-                                <a class="shopbtn" href="/photo/{{ resim.id }}/{{ resim.slug }}">Go to Detail</a>
+                                <h2 style="background-color:rgba(255, 255, 255, 0.6);">{{ resim.title }}</h2>
+                                <a  class="shopbtn pos_hover"  style="background-color:rgba(255, 255, 255, 0.6);" href="/photo/{{ resim.id }}/{{ resim.slug }}">Click For Detail</a>
                             </div>
                         </div>
                     </div>
@@ -22,4 +22,20 @@
         </div>
     {% endfor %}
 </div>
-<!-- End Slider area -->
+<!--
+
+
+                    <div class="single-slider single-slider-hm1 bg-img ptb-260" style="background-image: url({{ rs.image.url }})">
+                        <div class="container">
+                            <div class="slider-content slider-content-style-1 slider-animated-1">
+                                <h3 class="animated" style="background-color:rgba(255, 255, 255, 0.6);width:400px;">{{ rs.category }} <span>2018.</span></h3>
+                                <h2 class="animated" style="background-color:rgba(255, 255, 255, 0.6);width:500px;">{{ rs.title }}</h2>
+                                <p class="animated" style="background-color:rgba(255, 255, 255, 0.6);width:200px;">{{ rs.description }} </p>
+                                <a class="btn-hover slider-btn-style animated" style="background-color:rgba(255, 255, 255, 0.6);" href="/product/{{ rs.id }}/{{ rs.slug }}/">Satın Al</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+ -->
+

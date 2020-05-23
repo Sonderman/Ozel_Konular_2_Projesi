@@ -52,7 +52,7 @@
                                 </div>
                             {% endfor %}
                         {% endif %}
-
+                    {% if comments %}
                         <table>
 
                             <tr>
@@ -97,7 +97,7 @@
                                     </td>
                                     <td>
                                             <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
-                                                <li><a class="btn-danger" href="/user/deletecomment/{{ com.id }}"
+                                                <li><a class="btn btn-danger" href="/user/deletecomment/{{ com.id }}"
                                                        onclick="return confirm('Will be Deleted! Are you Sure?')"><p style="color:red;">DELETE</p></a>
                                                 </li>
                                             </ul>
@@ -105,6 +105,9 @@
                                 </tr>
                             {% endfor %}
                         </table>
+                    {% else %}
+                        You have not Commented yet!
+                    {% endif %}
                     </div>
                 </div>
             </div>

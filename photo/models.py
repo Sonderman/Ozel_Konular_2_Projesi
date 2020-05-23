@@ -62,7 +62,7 @@ class Photo(models.Model):
     description = models.CharField(max_length=255)
     detail = RichTextUploadingField(blank=True)
     slug = models.SlugField(null=False, unique=True)
-    image = models.ImageField(blank=True, upload_to='images/', max_length=255)  # py -m pip install --upgrade Pillow
+    image = models.ImageField(upload_to='images/', max_length=255)  # py -m pip install --upgrade Pillow
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)

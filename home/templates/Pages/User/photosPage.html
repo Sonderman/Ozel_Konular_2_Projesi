@@ -52,7 +52,7 @@
                                 </div>
                             {% endfor %}
                         {% endif %}
-
+                    {% if photos %}
                         <table>
 
                             <tr>
@@ -111,7 +111,11 @@
                                     </td>
                                 </tr>
                             {% endfor %}
+
                         </table>
+                        {% else %}
+                           You have not shared any photo yet! <br><br>
+                        {% endif %}
                     <a class="btn btn-primary" href="/user/addphoto" >Add Photo</a>
 
                     </div>
